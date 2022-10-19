@@ -1,0 +1,8 @@
+DND Project - Object Oriented Programming
+
+This program is being designed for users to quickly generate 
+DND characters. Ideally the program will utilize a GUI interface
+and allow the user to save characters to files for later reference.
+Additonally, the user will eventually be able to also set conditions
+for the character to meet. Such as higher standards of stats for the 
+character, name, etc.
