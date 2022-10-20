@@ -1,6 +1,8 @@
 import java.util.*;
 import java.util.Random;
 
+
+
 class character {
 
     //Hashtable dictionary data structure

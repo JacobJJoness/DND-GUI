@@ -13,7 +13,4 @@ character Class: Main data structure and generator of random character data.
 
 fileHandler Class: Handles loading and saving files for the character data.
 
-output Class: this class will serve as the GUI for the program.
-
-driver class: As the name suggests, this class will be the driver for the program
-putting all the classes together.
+GUI Class: this class will serve as the GUI for the program, and hold our main function.
