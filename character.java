@@ -5,6 +5,7 @@ class character {
 
     //Hashtable dictionary data structure
     Hashtable<String, String> statsDict = new Hashtable<String, String>();
+    //different character variables defined here
     private String name;
     private String race;
     private String classType;
@@ -12,10 +13,10 @@ class character {
 
     //randomized character constructor current a W.I.P
     character(){
-        this.name="Ragnar";
-        this.description="The mighty character " + this.name+ " has the following stats ";
-        this.race = "human";
-        this.classType = "Paladin";
+        this.name="Ragnar";//needs random generation
+        this.description="The mighty character " + this.name+ " has the following stats ";//needs random generation
+        this.race = "human";//needs random generation
+        this.classType = "Paladin";//needs random generation
         //inserting elements into the dictionary
         statsDict.put("INT",statGenerator());
         statsDict.put("DEX",statGenerator());
@@ -25,6 +26,11 @@ class character {
         statsDict.put("WIS",statGenerator());
     }
 
+
+    // statGenerator
+    //This function takes no paramaters
+    //but instead returns a randomly
+    //generated string value to be used as a stat
     private String statGenerator(){
         Random rand = new Random();//new random object
         int upperLimit = 20;//initializing a upperlimit value

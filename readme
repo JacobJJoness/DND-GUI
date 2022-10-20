@@ -6,3 +6,14 @@ and allow the user to save characters to files for later reference.
 Additonally, the user will eventually be able to also set conditions
 for the character to meet. Such as higher standards of stats for the 
 character, name, etc.
+
+Current Classes Below
+
+character Class: Main data structure and generator of random character data.
+
+fileHandler Class: Handles loading and saving files for the character data.
+
+output Class: this class will serve as the GUI for the program.
+
+driver class: As the name suggests, this class will be the driver for the program
+putting all the classes together.
