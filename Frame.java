@@ -1,4 +1,3 @@
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -62,7 +61,7 @@ class Frame extends JFrame{
 }
 
 
-public class GUI{
+public class App{
     public static void main(String[] args){
         Frame frame = new Frame();
     }
