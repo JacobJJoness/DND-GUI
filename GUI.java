@@ -1,4 +1,4 @@
-
+import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import java.awt.FlowLayout;
 
 class Frame extends JFrame{
+    private character mainChara = new character();
     Frame(){
         
         setTitle("DND Chracter Generator");   //sets title
@@ -20,10 +21,10 @@ class Frame extends JFrame{
 
         setLayout(new FlowLayout());
 
-        //code for setting our own Icon Style
+        //code for setting our own Icon Style--NOT YET COMPLETE
         ImageIcon logoImage = new ImageIcon("public/logo.png");
         setIconImage(logoImage.getImage());
-        getContentPane().setBackground(new Color(140,140,140));   //change color of background
+        getContentPane().setBackground(new Color(170,170,170));   //change color of background
         
         //ADDING LABELS TO DISPLAY
         setStatLabel();
@@ -33,23 +34,26 @@ class Frame extends JFrame{
     }
     //creates labels and sets them to their corresponding values
     private void setStatLabel(){
+        
+        Hashtable<String, String> stats = mainChara.getStats(); //grabbing character stats
+
         JLabel intStatDisp = new JLabel();
-        intStatDisp.setText("20");
+        intStatDisp.setText("Int : " + stats.get("INT"));//setting character stat to display generated stats
 
         JLabel dexStatDisp = new JLabel();
-        dexStatDisp.setText("20");
+        dexStatDisp.setText("Dex : " + stats.get("DEX"));
 
         JLabel conStatDisp = new JLabel();
-        conStatDisp.setText("20");
+        conStatDisp.setText("Str: " + stats.get("STR"));
 
         JLabel chrStatDisp = new JLabel();
-        chrStatDisp.setText("20");
+        chrStatDisp.setText("CON: " + stats.get("CON"));
 
         JLabel strStatDisp = new JLabel();
-        strStatDisp.setText("20");
+        strStatDisp.setText("Chr: " + stats.get("CHR"));
 
         JLabel wisStatDisp = new JLabel();
-        wisStatDisp.setText("20");
+        wisStatDisp.setText("Wis: " + stats.get("WIS"));
 
         add(intStatDisp);
         add(dexStatDisp);
