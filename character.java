@@ -35,8 +35,12 @@ class character {
     //generated string value to be used as a stat
     private String statGenerator(){
         Random rand = new Random();//new random object
-        int upperLimit = 20;//initializing a upperlimit value
+        int upperLimit = 18;//initializing a upperlimit value
+        int lowerLimit = 6;
         int generatedStat = rand.nextInt(upperLimit);
+        while(generatedStat<lowerLimit){
+            generatedStat = rand.nextInt(upperLimit);
+        }
         String stringStat = String.valueOf(generatedStat);
         return stringStat;
 

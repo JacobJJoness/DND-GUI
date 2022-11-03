@@ -24,6 +24,8 @@ class Frame extends JFrame{
         //code for setting our own Icon Style--NOT YET COMPLETE
         ImageIcon logoImage = new ImageIcon("public/logo.png");
         setIconImage(logoImage.getImage());
+
+        //adjust color of the window--can take rgb or hexadecimal
         getContentPane().setBackground(new Color(170,170,170));   //change color of background
         
         //ADDING LABELS TO DISPLAY
@@ -32,6 +34,21 @@ class Frame extends JFrame{
 
         
     }
+    //will contain a button that is capable of generating a new character
+    private void generatorPanel(){
+        return;
+    }
+    //may be used to give the user a Avatar for the character of sorts
+    private void characterImagePanel(){
+        return;
+    }
+    //should display character information, stats,description,etc
+    private void informationPanel(){
+
+    }
+
+
+
     //creates labels and sets them to their corresponding values
     private void setStatLabel(){
         
