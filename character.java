@@ -58,6 +58,8 @@ class character {
     public void setDesc(String newDesc){
         this.description = newDesc;
     }
+
+
     public Hashtable<String, String> getStats(){
         return this.statsDict;
     }
@@ -71,4 +73,23 @@ class character {
     public void setRace(String newRace){
         this.race = newRace;
     }
+
+    //NEEDED FUNCTIONS BELOW
+
+
+    // Random Name Generator
+    //this function will need to be able to randomly draw a first and last name
+    //this can be done by storing a file with a long list of names and reading them
+    //into an array, and then generating a random number to then "select" a name
+    //the static folder is where we should store non-code files that do not change
+
+
+
+    //Random Class Generator
+    //similar to above
+
+    //Random Race Generator
+    //similar to above
+
+    
 }

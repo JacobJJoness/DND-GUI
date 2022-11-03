@@ -1,20 +1,73 @@
-import javax.swing.BorderFactory;
+import java.util.*;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-//Current WIP as we are still deciding what java GUI framework to use
-//currently testing swing as the gui
+import java.awt.Color;
 
-public class GUI {
-    public GUI(){
-        JFrame frame = new JFrame();//creating main frame
-        JPanel panel = new JPanel();//creating panel inside the frame
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import java.awt.FlowLayout;
 
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panel.setLayout(new GridLayout(0,1));
-    }   
+class Frame extends JFrame{
+    private character mainChara = new character();
+    Frame(){
+        
+        setTitle("DND Chracter Generator");   //sets title
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// controls how exit works, also HIDE_ON_CLOSE and NOTHING_ON_CLOSE
+        //frame.setResizeable(false); //will lock the frame from being resized
+        setSize(600,800);     //sets x and y dimension
+        setVisible(true);     //makes the frame visible
 
-    public static void main(String args[]){
+        setLayout(new FlowLayout());
 
+        //code for setting our own Icon Style--NOT YET COMPLETE
+        ImageIcon logoImage = new ImageIcon("public/logo.png");
+        setIconImage(logoImage.getImage());
+        getContentPane().setBackground(new Color(170,170,170));   //change color of background
+        
+        //ADDING LABELS TO DISPLAY
+        setStatLabel();
+
+
+        
+    }
+    //creates labels and sets them to their corresponding values
+    private void setStatLabel(){
+        
+        Hashtable<String, String> stats = mainChara.getStats(); //grabbing character stats
+
+        JLabel intStatDisp = new JLabel();
+        intStatDisp.setText("Int : " + stats.get("INT"));//setting character stat to display generated stats
+
+        JLabel dexStatDisp = new JLabel();
+        dexStatDisp.setText("Dex : " + stats.get("DEX"));
+
+        JLabel conStatDisp = new JLabel();
+        conStatDisp.setText("Str: " + stats.get("STR"));
+
+        JLabel chrStatDisp = new JLabel();
+        chrStatDisp.setText("CON: " + stats.get("CON"));
+
+        JLabel strStatDisp = new JLabel();
+        strStatDisp.setText("Chr: " + stats.get("CHR"));
+
+        JLabel wisStatDisp = new JLabel();
+        wisStatDisp.setText("Wis: " + stats.get("WIS"));
+
+        add(intStatDisp);
+        add(dexStatDisp);
+        add(conStatDisp);
+        add(chrStatDisp);
+        add(strStatDisp);
+        add(wisStatDisp);
+
+    }
+}
+
+
+public class GUI{
+    public static void main(String[] args){
+        Frame frame = new Frame();
     }
 }
