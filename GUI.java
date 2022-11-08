@@ -4,13 +4,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 import java.awt.FlowLayout;
 
-class Frame extends JFrame{
+class Frame extends JFrame implements ActionListener{
     private character mainChara = new character();
+
+    JButton generator;
     Frame(){
         
         setTitle("DND Chracter Generator");   //sets title
@@ -28,30 +34,57 @@ class Frame extends JFrame{
         //adjust color of the window--can take rgb or hexadecimal
         getContentPane().setBackground(new Color(170,170,170));   //change color of background
         
-        //ADDING LABELS TO DISPLAY
-        setStatLabel();
+        
+
+        //content panels
+        generatorPanel();
+        characterImagePanel();
+        informationPanel();
+        
 
 
         
     }
     //will contain a button that is capable of generating a new character
     private void generatorPanel(){
-        return;
+        //panel structure and style
+        JPanel genPanel = new JPanel();
+        genPanel.setBackground(Color.blue);
+        genPanel.setBounds(0,0,250,250);
+        //Button for character generation
+        generator = new JButton();
+        generator.setText("Generate");//text inside button
+        generator.addActionListener(this);//adding button action
+        generator.setFocusable(false);//removing a default box around text
+        genPanel.add(generator);//adding button to panel
+
+        
+        add(genPanel);
     }
     //may be used to give the user a Avatar for the character of sorts
     private void characterImagePanel(){
-        return;
+        JPanel charaPanel = new JPanel();
+        charaPanel.setBackground(Color.red);
+        charaPanel.setBounds(250,0,250,250);
+        add(charaPanel);
     }
     //should display character information, stats,description,etc
     private void informationPanel(){
+        JPanel infoPanel = new JPanel();
+        infoPanel.setBackground(Color.green);
+        infoPanel.setBounds(0,250,250,250);
+        
+        setStatLabels(infoPanel);//adding generated stats
+        
+       
+
+        
+
+        add(infoPanel);
 
     }
-
-
-
-    //creates labels and sets them to their corresponding values
-    private void setStatLabel(){
-        
+    private void setStatLabels(JPanel item){
+         
         Hashtable<String, String> stats = mainChara.getStats(); //grabbing character stats
 
         JLabel intStatDisp = new JLabel();
@@ -72,13 +105,26 @@ class Frame extends JFrame{
         JLabel wisStatDisp = new JLabel();
         wisStatDisp.setText("Wis: " + stats.get("WIS"));
 
-        add(intStatDisp);
-        add(dexStatDisp);
-        add(conStatDisp);
-        add(chrStatDisp);
-        add(strStatDisp);
-        add(wisStatDisp);
+        item.add(intStatDisp);
+        item.add(dexStatDisp);
+        item.add(conStatDisp);
+        item.add(chrStatDisp);
+        item.add(strStatDisp);
+        item.add(wisStatDisp);
+    }
+        
+    
 
+
+
+  
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        if(e.getSource()==generator){
+            System.out.println("poo");
+        }
+        
     }
 }
 

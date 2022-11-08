@@ -95,5 +95,10 @@ class character {
     //Random Race Generator
     //similar to above
 
+
+    //newCharacter()
+    //this function should completely generate a new character 
+    //meaning we will simply call all of our generation methods and store them within the same character
+
     
 }
