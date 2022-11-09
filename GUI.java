@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -54,7 +55,7 @@ class Frame extends JFrame implements ActionListener{
         informationPanel();
         
 
-
+        pack();
         
     }
     //will contain a button that is capable of generating a new character
@@ -63,6 +64,7 @@ class Frame extends JFrame implements ActionListener{
         genPanel = new JPanel();
         genPanel.setBackground(Color.blue);
         genPanel.setBounds(0,0,250,250);
+        genPanel.setPreferredSize(new Dimension(250,250));
         //Button for character generation
         generator = new JButton();
         generator.setText("Generate");//text inside button
@@ -78,13 +80,16 @@ class Frame extends JFrame implements ActionListener{
         charaPanel = new JPanel();
         charaPanel.setBackground(Color.red);
         charaPanel.setBounds(250,0,250,250);
+        charaPanel.setPreferredSize(new Dimension(250,250));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
         add(charaPanel);
     }
     //should display character information, stats,description,etc
     private void informationPanel(){
         infoPanel = new JPanel();
+        infoPanel.setLayout(new FlowLayout());
         infoPanel.setBackground(Color.green);
-        infoPanel.setBounds(0,250,250,250);
+        infoPanel.setBounds(0,250,500,250);
+        infoPanel.setPreferredSize(new Dimension(250,250));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
         
         setStatLabels(infoPanel);//adding generated stats
         
