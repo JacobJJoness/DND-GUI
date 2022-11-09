@@ -99,6 +99,16 @@ class character {
     //newCharacter()
     //this function should completely generate a new character 
     //meaning we will simply call all of our generation methods and store them within the same character
+    //this function has been started below
+    public void newCharacter(){
+        statsDict.put("INT",statGenerator());
+        statsDict.put("DEX",statGenerator());
+        statsDict.put("STR",statGenerator());
+        statsDict.put("CON",statGenerator());
+        statsDict.put("CHR",statGenerator());
+        statsDict.put("WIS",statGenerator());
+
+    }
 
     
 }

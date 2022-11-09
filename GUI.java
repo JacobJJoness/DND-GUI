@@ -15,8 +15,20 @@ import java.awt.FlowLayout;
 
 class Frame extends JFrame implements ActionListener{
     private character mainChara = new character();
-
+    //initializing buttons
     JButton generator;
+    //initializing panels
+    JPanel charaPanel;
+    JPanel genPanel;
+    JPanel infoPanel;
+    //initializing labels
+    JLabel intStatDisp;
+    JLabel dexStatDisp;
+    JLabel conStatDisp;
+    JLabel chrStatDisp;
+    JLabel strStatDisp;
+    JLabel wisStatDisp;
+
     Frame(){
         
         setTitle("DND Chracter Generator");   //sets title
@@ -48,7 +60,7 @@ class Frame extends JFrame implements ActionListener{
     //will contain a button that is capable of generating a new character
     private void generatorPanel(){
         //panel structure and style
-        JPanel genPanel = new JPanel();
+        genPanel = new JPanel();
         genPanel.setBackground(Color.blue);
         genPanel.setBounds(0,0,250,250);
         //Button for character generation
@@ -63,14 +75,14 @@ class Frame extends JFrame implements ActionListener{
     }
     //may be used to give the user a Avatar for the character of sorts
     private void characterImagePanel(){
-        JPanel charaPanel = new JPanel();
+        charaPanel = new JPanel();
         charaPanel.setBackground(Color.red);
         charaPanel.setBounds(250,0,250,250);
         add(charaPanel);
     }
     //should display character information, stats,description,etc
     private void informationPanel(){
-        JPanel infoPanel = new JPanel();
+        infoPanel = new JPanel();
         infoPanel.setBackground(Color.green);
         infoPanel.setBounds(0,250,250,250);
         
@@ -87,22 +99,22 @@ class Frame extends JFrame implements ActionListener{
          
         Hashtable<String, String> stats = mainChara.getStats(); //grabbing character stats
 
-        JLabel intStatDisp = new JLabel();
+        intStatDisp = new JLabel();
         intStatDisp.setText("Int : " + stats.get("INT"));//setting character stat to display generated stats
 
-        JLabel dexStatDisp = new JLabel();
+        dexStatDisp = new JLabel();
         dexStatDisp.setText("Dex : " + stats.get("DEX"));
 
-        JLabel conStatDisp = new JLabel();
+        conStatDisp = new JLabel();
         conStatDisp.setText("Str: " + stats.get("STR"));
 
-        JLabel chrStatDisp = new JLabel();
+        chrStatDisp = new JLabel();
         chrStatDisp.setText("CON: " + stats.get("CON"));
 
-        JLabel strStatDisp = new JLabel();
+        strStatDisp = new JLabel();
         strStatDisp.setText("Chr: " + stats.get("CHR"));
 
-        JLabel wisStatDisp = new JLabel();
+        wisStatDisp = new JLabel();
         wisStatDisp.setText("Wis: " + stats.get("WIS"));
 
         item.add(intStatDisp);
@@ -112,9 +124,28 @@ class Frame extends JFrame implements ActionListener{
         item.add(strStatDisp);
         item.add(wisStatDisp);
     }
+
+    private void updateStatLabels(){
+        Hashtable<String, String> stats = mainChara.getStats(); 
+        intStatDisp.setText("Int : " + stats.get("INT"));//setting character stat to display generated stats
+        dexStatDisp.setText("Dex : " + stats.get("DEX"));
+
+        
+        conStatDisp.setText("Str: " + stats.get("STR"));
+
+    
+        chrStatDisp.setText("CON: " + stats.get("CON"));
+
+      
+        strStatDisp.setText("Chr: " + stats.get("CHR"));
+
+       
+        wisStatDisp.setText("Wis: " + stats.get("WIS"));
+    }
+   
         
     
-
+   
 
 
   
@@ -122,7 +153,9 @@ class Frame extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if(e.getSource()==generator){
-            System.out.println("poo");
+            mainChara.newCharacter();
+            updateStatLabels();
+            
         }
         
     }
