@@ -2,17 +2,20 @@ import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.FlowLayout;
+
 
 class Frame extends JFrame implements ActionListener{
     private character mainChara = new character();
@@ -34,8 +37,9 @@ class Frame extends JFrame implements ActionListener{
         
         setTitle("DND Chracter Generator");   //sets title
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// controls how exit works, also HIDE_ON_CLOSE and NOTHING_ON_CLOSE
-        //frame.setResizeable(false); //will lock the frame from being resized
-        setSize(600,800);     //sets x and y dimension
+        setResizable(false); //will lock the frame from being resized
+        setLayout(null);
+        setSize(1920,1080);     //sets x and y dimension
         setVisible(true);     //makes the frame visible
 
         setLayout(new FlowLayout());
@@ -45,21 +49,32 @@ class Frame extends JFrame implements ActionListener{
         setIconImage(logoImage.getImage());
 
         //adjust color of the window--can take rgb or hexadecimal
-        getContentPane().setBackground(new Color(170,170,170));   //change color of background
+        // getContentPane().setBackground(new Color(220,220,220));   //change color of background
+
+        // background picture
+        //To layer over background we must do background.add
+        ImageIcon backImg = new ImageIcon("public/background.jpg");
+        JLabel background = new JLabel("",backImg,JLabel.CENTER);
+        background.setBounds(0,0,1920,1080);
+        background.setLayout(new BorderLayout());
+        
+      
+        add(background);
+        
         
         
 
         //content panels
-        generatorPanel();
-        characterImagePanel();
-        informationPanel();
+        generatorPanel(background);
+        characterImagePanel(background);
+        informationPanel(background);
         
 
         pack();
         
     }
     //will contain a button that is capable of generating a new character
-    private void generatorPanel(){
+    private void generatorPanel(JLabel item){
         //panel structure and style
         genPanel = new JPanel();
         genPanel.setBackground(Color.blue);
@@ -73,18 +88,18 @@ class Frame extends JFrame implements ActionListener{
         genPanel.add(generator);//adding button to panel
 
         
-        add(genPanel);
+        item.add(genPanel);
     }
     //may be used to give the user a Avatar for the character of sorts
-    private void characterImagePanel(){
+    private void characterImagePanel(JLabel item){
         charaPanel = new JPanel();
         charaPanel.setBackground(Color.red);
         charaPanel.setBounds(250,0,250,250);
         charaPanel.setPreferredSize(new Dimension(250,250));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
-        add(charaPanel);
+        item.add(charaPanel);
     }
     //should display character information, stats,description,etc
-    private void informationPanel(){
+    private void informationPanel(JLabel item){
         infoPanel = new JPanel();
         infoPanel.setLayout(new FlowLayout());
         infoPanel.setBackground(Color.green);
@@ -97,7 +112,7 @@ class Frame extends JFrame implements ActionListener{
 
         
 
-        add(infoPanel);
+        item.add(infoPanel);
 
     }
     private void setStatLabels(JPanel item){
