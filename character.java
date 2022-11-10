@@ -23,7 +23,7 @@ class character {
         this.name=nameGenerator();//needs random generation
         this.description="The mighty character " + this.name+ " has the following stats ";//needs random generation
         this.race = "human";//needs random generation
-        this.classType = "Paladin";//needs random generation
+        this.classType = classGenerator();//needs random generation
         //inserting elements into the dictionary
         statsDict.put("INT",statGenerator());
         statsDict.put("DEX",statGenerator());
@@ -68,6 +68,16 @@ class character {
         return name;
         
         
+    }
+
+    private String classGenerator(){
+        String classArray[]= grabber("static/classes.txt");
+        Random rand =  new Random();
+        int upperLimit = 12;
+        int classPosition = rand.nextInt(upperLimit);
+        String charaClass = classArray[classPosition];
+        return charaClass;
+
     }
     
     
