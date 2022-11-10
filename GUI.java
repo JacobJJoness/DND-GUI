@@ -20,6 +20,8 @@ import java.awt.FlowLayout;
 class Frame extends JFrame implements ActionListener{
     private character mainChara = new character();
 
+    //panel Color
+    Color panelColor = new Color(150,150,150,150);
     //initializing buttons
     JButton generator;
 
@@ -36,6 +38,7 @@ class Frame extends JFrame implements ActionListener{
     JLabel chrStatDisp;
     JLabel strStatDisp;
     JLabel wisStatDisp;
+    JLabel test;
 
     Frame(){
         
@@ -83,7 +86,7 @@ class Frame extends JFrame implements ActionListener{
         
         
         genPanel.setBounds(0,0,250,250);
-        genPanel.setPreferredSize(new Dimension(300,300));
+        genPanel.setPreferredSize(new Dimension(300,400));
 
         //Button for character generation
         generator = new JButton();
@@ -94,7 +97,7 @@ class Frame extends JFrame implements ActionListener{
 
 
         //code to wrap panel to make it partially transparent
-        genPanel.setBackground(new Color(100,100,100,150));//A value determines transparency
+        genPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(genPanel));
         
     }
@@ -103,12 +106,15 @@ class Frame extends JFrame implements ActionListener{
     //may be used to give the user a Avatar for the character of sorts
     private void characterImagePanel(JLabel item){
         charaPanel = new JPanel();
-
         charaPanel.setBounds(250,0,250,250);
-        charaPanel.setPreferredSize(new Dimension(250,250));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
+        charaPanel.setPreferredSize(new Dimension(300,400));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
         //code to wrap panel to make it partially transparent
-        charaPanel.setBackground(new Color(100,100,100,150));//A value determines transparency
+        charaPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(charaPanel));
+        //test label
+        test = new JLabel();
+        test.setText(mainChara.getName());
+        charaPanel.add(test);
     }
 
 
@@ -118,13 +124,13 @@ class Frame extends JFrame implements ActionListener{
         infoPanel.setLayout(new FlowLayout());
         
         infoPanel.setBounds(0,250,500,250);
-        infoPanel.setPreferredSize(new Dimension(250,250));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
+        infoPanel.setPreferredSize(new Dimension(300,400));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
         
         //adding statistic labels
         setStatLabels(infoPanel);//adding generated stats
 
         //code to wrap panel to make it partially transparent
-        infoPanel.setBackground(new Color(100,100,100,150));//A value determines transparency
+        infoPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(infoPanel));
 
     }
@@ -166,6 +172,7 @@ class Frame extends JFrame implements ActionListener{
         item.add(wisStatDisp);
     }
 
+    //UPDATER FUNCTIONS
     private void updateStatLabels(){
         //accessing stat labels and updating when generate is used
         Hashtable<String, String> stats = mainChara.getStats(); 
@@ -180,6 +187,9 @@ class Frame extends JFrame implements ActionListener{
         strStatDisp.setText("Chr: " + stats.get("CHR"));
 
         wisStatDisp.setText("Wis: " + stats.get("WIS"));
+    }
+    private void updateNameLabel(){
+        test.setText(mainChara.getName());
     }
    
         
@@ -197,6 +207,7 @@ class Frame extends JFrame implements ActionListener{
 
             mainChara.newCharacter();
             updateStatLabels();
+            updateNameLabel();
             
         }
         

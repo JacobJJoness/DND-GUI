@@ -1,5 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.Random;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner;
 
 
 
@@ -15,7 +20,7 @@ class character {
 
     //randomized character constructor current a W.I.P
     character(){
-        this.name="Ragnar";//needs random generation
+        this.name=nameGenerator();//needs random generation
         this.description="The mighty character " + this.name+ " has the following stats ";//needs random generation
         this.race = "human";//needs random generation
         this.classType = "Paladin";//needs random generation
@@ -27,6 +32,8 @@ class character {
         statsDict.put("CHR",statGenerator());
         statsDict.put("WIS",statGenerator());
     }
+
+    //RANDOM GENERATORS BELOW
 
 
     // statGenerator
@@ -45,6 +52,26 @@ class character {
         return stringStat;
 
     }
+
+    private String nameGenerator(){
+        //grabbing and storing names into arrays
+        String[] firstNameArray = grabber("static/name.txt");
+        String[] lastNameArray = grabber("static/lastname.txt");
+        //random generation
+        int upperLimit = 100;
+        Random rand = new Random();
+        int generatedFirstPosition = rand.nextInt(upperLimit);
+        int generatedLastPosition = rand.nextInt(upperLimit);
+        // setting up string to return
+        String name = firstNameArray[generatedFirstPosition] + " " + lastNameArray[generatedLastPosition];
+        
+        return name;
+        
+        
+    }
+    
+    
+    
     // GETTERS and SETTERS below
 
     public String getName(){
@@ -78,6 +105,26 @@ class character {
         this.race = newRace;
     }
 
+    public String[] grabber(String PATH){
+        String[] items = new String[110];
+        int i = 0; //iterator for while loop
+        try {
+            File myObj = new File(PATH);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+              items[i]= myReader.nextLine();
+              i++;
+              
+
+            }
+            myReader.close();
+          } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return items;
+    }
+
     //NEEDED FUNCTIONS BELOW
 
 
@@ -107,6 +154,7 @@ class character {
         statsDict.put("CON",statGenerator());
         statsDict.put("CHR",statGenerator());
         statsDict.put("WIS",statGenerator());
+        this.name = nameGenerator();
 
     }
 
