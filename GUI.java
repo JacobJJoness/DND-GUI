@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,7 +39,7 @@ class Frame extends JFrame implements ActionListener{
     JLabel chrStatDisp;
     JLabel strStatDisp;
     JLabel wisStatDisp;
-    JLabel test;
+    JLabel name;
 
     Frame(){
         
@@ -108,13 +109,14 @@ class Frame extends JFrame implements ActionListener{
         charaPanel = new JPanel();
         charaPanel.setBounds(250,0,250,250);
         charaPanel.setPreferredSize(new Dimension(300,400));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
+        //adding name
+        setNameLabel(charaPanel);
+        
         //code to wrap panel to make it partially transparent
         charaPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(charaPanel));
-        //test label
-        test = new JLabel();
-        test.setText(mainChara.getName());
-        charaPanel.add(test);
+       
+       
     }
 
 
@@ -138,7 +140,15 @@ class Frame extends JFrame implements ActionListener{
     
     
 
+    //label setters below
+    private void setNameLabel(JPanel item){
+        name = new JLabel();
+        name.setText(mainChara.getName());
+        name.setFont(new Font("New Peninim MT",Font.ITALIC,25));
+        item.add(name);
+        
 
+    }
 
     private void setStatLabels(JPanel item){
         
@@ -189,7 +199,7 @@ class Frame extends JFrame implements ActionListener{
         wisStatDisp.setText("Wis: " + stats.get("WIS"));
     }
     private void updateNameLabel(){
-        test.setText(mainChara.getName());
+        name.setText(mainChara.getName());
     }
    
         
