@@ -42,8 +42,9 @@ class character {
     private void raceDictFiller(){
         String[] descArr = grabber("static/raceInfo.txt");
         String[] raceArr = grabber("static/race.txt");
-        for(int i =0; i < raceArr.length; i++){
+        for(int i =0; i < 44; i++){
             raceDict.put(raceArr[i],descArr[i]);
+            
         }
         
         return;
