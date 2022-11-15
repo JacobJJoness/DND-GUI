@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 import java.awt.BorderLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -40,6 +41,7 @@ class Frame extends JFrame implements ActionListener{
     JLabel strStatDisp;
     JLabel wisStatDisp;
     JLabel name;
+    JLabel classType;
 
     Frame(){
         
@@ -109,9 +111,11 @@ class Frame extends JFrame implements ActionListener{
         charaPanel = new JPanel();
         charaPanel.setBounds(250,0,250,250);
         charaPanel.setPreferredSize(new Dimension(300,400));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
+        charaPanel.setLayout(new BoxLayout(charaPanel, BoxLayout.Y_AXIS));
         //adding name
         setNameLabel(charaPanel);
-        
+        //adding class label
+        setClassLabel(charaPanel);
         //code to wrap panel to make it partially transparent
         charaPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(charaPanel));
@@ -122,6 +126,7 @@ class Frame extends JFrame implements ActionListener{
 
     //should display character information, stats,description,etc
     private void informationPanel(JLabel item){
+        //panel setup
         infoPanel = new JPanel();
         infoPanel.setLayout(new FlowLayout());
         
@@ -130,6 +135,7 @@ class Frame extends JFrame implements ActionListener{
         
         //adding statistic labels
         setStatLabels(infoPanel);//adding generated stats
+
 
         //code to wrap panel to make it partially transparent
         infoPanel.setBackground(panelColor);//A value determines transparency
@@ -141,10 +147,21 @@ class Frame extends JFrame implements ActionListener{
     
 
     //label setters below
+    private void setClassLabel(JPanel item){
+        classType = new JLabel();
+        classType.setVerticalAlignment(JLabel.CENTER);
+        classType.setText("Class: " + mainChara.getClassType() );
+        classType.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        
+        item.add(classType);
+
+    }
     private void setNameLabel(JPanel item){
         name = new JLabel();
-        name.setText(mainChara.getName());
+        name.setText( mainChara.getName() );
+        name.setHorizontalAlignment(JLabel.CENTER);
         name.setFont(new Font("New Peninim MT",Font.ITALIC,25));
+       
         item.add(name);
         
 
@@ -157,21 +174,27 @@ class Frame extends JFrame implements ActionListener{
 
         intStatDisp = new JLabel();
         intStatDisp.setText("Int : " + stats.get("INT"));//setting character stat to display generated stats
+        intStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
 
         dexStatDisp = new JLabel();
         dexStatDisp.setText("Dex : " + stats.get("DEX"));
+        dexStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
 
         conStatDisp = new JLabel();
         conStatDisp.setText("Str: " + stats.get("STR"));
+        conStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
 
         chrStatDisp = new JLabel();
         chrStatDisp.setText("CON: " + stats.get("CON"));
+        chrStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
 
         strStatDisp = new JLabel();
         strStatDisp.setText("Chr: " + stats.get("CHR"));
+        strStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
 
         wisStatDisp = new JLabel();
         wisStatDisp.setText("Wis: " + stats.get("WIS"));
+        wisStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
 
         //adding all items
         item.add(intStatDisp);
@@ -201,6 +224,9 @@ class Frame extends JFrame implements ActionListener{
     private void updateNameLabel(){
         name.setText(mainChara.getName());
     }
+    private void updateClassLabel(){
+        classType.setText("Class: " + mainChara.getClassType());
+    }
    
         
     
@@ -218,6 +244,7 @@ class Frame extends JFrame implements ActionListener{
             mainChara.newCharacter();
             updateStatLabels();
             updateNameLabel();
+            updateClassLabel();
             
         }
         

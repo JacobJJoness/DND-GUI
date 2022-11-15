@@ -73,7 +73,7 @@ class character {
     private String classGenerator(){
         String classArray[]= grabber("static/classes.txt");
         Random rand =  new Random();
-        int upperLimit = 12;
+        int upperLimit = 11;
         int classPosition = rand.nextInt(upperLimit);
         String charaClass = classArray[classPosition];
         return charaClass;
@@ -165,6 +165,7 @@ class character {
         statsDict.put("CHR",statGenerator());
         statsDict.put("WIS",statGenerator());
         this.name = nameGenerator();
+        this.classType = classGenerator();
 
     }
 
