@@ -12,6 +12,9 @@ class character {
 
     //Hashtable dictionary data structure
     Hashtable<String, String> statsDict = new Hashtable<String, String>();
+    
+    //Hashtable dictionary for race descriptions
+    Hashtable<String, String> raceDict = new Hashtable<String, String>();
     //different character variables defined here
     private String name;
     private String race;
@@ -21,10 +24,12 @@ class character {
     //randomized character constructor current a W.I.P
     character(){
         this.name=nameGenerator();//needs random generation
-        this.description="The mighty character " + this.name+ " has the following stats ";//needs random generation
-        this.race = raceGenerator();//needs random generation
+        raceDictFiller();//filling the race dictionary
+        this.race = raceGenerator();//needs random generation\
+        this.description=getDesc(race);//needs random generation
         this.classType = classGenerator();//needs random generation
         //inserting elements into the dictionary
+        raceDictFiller();
         statsDict.put("INT",statGenerator());
         statsDict.put("DEX",statGenerator());
         statsDict.put("STR",statGenerator());
@@ -33,6 +38,16 @@ class character {
         statsDict.put("WIS",statGenerator());
     }
 
+    // fills race dictionary
+    private void raceDictFiller(){
+        String[] descArr = grabber("static/raceInfo.txt");
+        String[] raceArr = grabber("static/race.txt");
+        for(int i =0; i < raceArr.length; i++){
+            raceDict.put(raceArr[i],descArr[i]);
+        }
+        
+        return;
+    }
     //RANDOM GENERATORS BELOW
 
 
@@ -79,6 +94,7 @@ class character {
         return charaClass;
 
     }
+   
     private String raceGenerator(){
         String raceArray[] = grabber("static/race.txt");
         Random rand = new Random();
@@ -95,8 +111,8 @@ class character {
     public String getName(){
         return this.name;
     }
-    public String getDesc(){
-        return this.description;
+    public String getDesc(String itemKey){
+        return raceDict.get(itemKey);
     }
     public String getClassType(){
         return this.classType;
@@ -175,6 +191,7 @@ class character {
         this.name = nameGenerator();
         this.classType = classGenerator();
         this.race = raceGenerator();
+        this.description = getDesc(race);
 
     }
 

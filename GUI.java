@@ -44,6 +44,7 @@ class Frame extends JFrame implements ActionListener{
     JLabel name;//character name
     JLabel classType; //character class
     JLabel race;//character race
+    JLabel raceDesc;//character race description
 
     Frame(){
         
@@ -120,6 +121,8 @@ class Frame extends JFrame implements ActionListener{
         setClassLabel(charaPanel);
         //adding race label
         setRaceLabel(charaPanel);
+        //adding race description label
+        setDescLabel(charaPanel);
         //code to wrap panel to make it partially transparent
         charaPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(charaPanel));
@@ -158,6 +161,12 @@ class Frame extends JFrame implements ActionListener{
     
 
     //label setters below
+    private void setDescLabel(JPanel item){
+        raceDesc = new JLabel();
+        raceDesc.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        raceDesc.setText(mainChara.getDesc(mainChara.getName()));
+        item.add(raceDesc);
+    }
     private void setRaceLabel(JPanel item){
         race = new JLabel();
         race.setText("Race"+ mainChara.getRace());
@@ -247,6 +256,9 @@ class Frame extends JFrame implements ActionListener{
     private void updateRaceLabel(){
         race.setText("Race: "+mainChara.getRace());
     }
+    private void updateDescLabel(){
+        raceDesc.setText(mainChara.getDesc(mainChara.getName()));
+    }
    
         
     
@@ -266,6 +278,7 @@ class Frame extends JFrame implements ActionListener{
             updateNameLabel();
             updateClassLabel();
             updateRaceLabel();
+            updateDescLabel();
             
         }
         
