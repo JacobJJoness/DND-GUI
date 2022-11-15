@@ -34,14 +34,16 @@ class Frame extends JFrame implements ActionListener{
 
 
     //initializing labels
-    JLabel intStatDisp;
-    JLabel dexStatDisp;
-    JLabel conStatDisp;
-    JLabel chrStatDisp;
-    JLabel strStatDisp;
-    JLabel wisStatDisp;
-    JLabel name;
-    JLabel classType;
+   
+    JLabel intStatDisp; //stat
+    JLabel dexStatDisp; //stat
+    JLabel conStatDisp;//stat
+    JLabel chrStatDisp;//stat
+    JLabel strStatDisp;//stat
+    JLabel wisStatDisp;//stat
+    JLabel name;//character name
+    JLabel classType; //character class
+    JLabel race;//character race
 
     Frame(){
         
@@ -116,6 +118,8 @@ class Frame extends JFrame implements ActionListener{
         setNameLabel(charaPanel);
         //adding class label
         setClassLabel(charaPanel);
+        //adding race label
+        setRaceLabel(charaPanel);
         //code to wrap panel to make it partially transparent
         charaPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(charaPanel));
@@ -128,14 +132,21 @@ class Frame extends JFrame implements ActionListener{
     private void informationPanel(JLabel item){
         //panel setup
         infoPanel = new JPanel();
-        infoPanel.setLayout(new FlowLayout());
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         
         infoPanel.setBounds(0,250,500,250);
         infoPanel.setPreferredSize(new Dimension(300,400));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
+        //Header for panel
+        JLabel statHeader = new JLabel();
+        statHeader.setText("Character Stats");
+        statHeader.setFont(new Font("New Peninim MT",Font.ITALIC,25));
         
+        //ADDING LABELS++++++++++
+
+        infoPanel.add(statHeader);
         //adding statistic labels
         setStatLabels(infoPanel);//adding generated stats
-
+        //++++++++++++
 
         //code to wrap panel to make it partially transparent
         infoPanel.setBackground(panelColor);//A value determines transparency
@@ -147,6 +158,12 @@ class Frame extends JFrame implements ActionListener{
     
 
     //label setters below
+    private void setRaceLabel(JPanel item){
+        race = new JLabel();
+        race.setText("Race"+ mainChara.getRace());
+        race.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        item.add(race);
+    }
     private void setClassLabel(JPanel item){
         classType = new JLabel();
         classType.setVerticalAlignment(JLabel.CENTER);
@@ -227,6 +244,9 @@ class Frame extends JFrame implements ActionListener{
     private void updateClassLabel(){
         classType.setText("Class: " + mainChara.getClassType());
     }
+    private void updateRaceLabel(){
+        race.setText("Race: "+mainChara.getRace());
+    }
    
         
     
@@ -245,6 +265,7 @@ class Frame extends JFrame implements ActionListener{
             updateStatLabels();
             updateNameLabel();
             updateClassLabel();
+            updateRaceLabel();
             
         }
         

@@ -22,7 +22,7 @@ class character {
     character(){
         this.name=nameGenerator();//needs random generation
         this.description="The mighty character " + this.name+ " has the following stats ";//needs random generation
-        this.race = "human";//needs random generation
+        this.race = raceGenerator();//needs random generation
         this.classType = classGenerator();//needs random generation
         //inserting elements into the dictionary
         statsDict.put("INT",statGenerator());
@@ -78,6 +78,14 @@ class character {
         String charaClass = classArray[classPosition];
         return charaClass;
 
+    }
+    private String raceGenerator(){
+        String raceArray[] = grabber("static/race.txt");
+        Random rand = new Random();
+        int upperLimit = 44;
+        int raceArrPosition = rand.nextInt(upperLimit);
+        String charaRace = raceArray[raceArrPosition];
+        return charaRace;
     }
     
     
@@ -166,6 +174,7 @@ class character {
         statsDict.put("WIS",statGenerator());
         this.name = nameGenerator();
         this.classType = classGenerator();
+        this.race = raceGenerator();
 
     }
 
