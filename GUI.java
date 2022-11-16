@@ -163,7 +163,7 @@ class Frame extends JFrame implements ActionListener{
     //label setters below
     private void setDescLabel(JPanel item){
         raceDesc = new JLabel();
-        raceDesc.setFont(new Font("New Peninim MT",Font.ITALIC,10));
+        raceDesc.setFont(new Font("New Peninim MT",Font.ITALIC,18));
         raceDesc.setText(mainChara.getDesc(mainChara.getRace()));
         item.add(raceDesc);
     }
