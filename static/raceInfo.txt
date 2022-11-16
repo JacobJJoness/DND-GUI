@@ -1,16 +1,16 @@
-Dragonborn look very much like dragons standing erect in humanoid form,though they lack wings or a tail.
-Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.
-Elves are a magical people of otherworldy grace, living in the world but not entirely part of it.
-Half-elves combine what some say are the best qualities of their elf and human parents.
-Humans are the most adaptable and ambitious people among the common races. Whatever drives them, humans are the innovators, the achievers, and the pioneers of the worlds.
-A Gnome's enery and enthusiasm for living shines through every inch of his or her tiny body.
-The diminutive halfings survive in a world full of larger creatures by avoiding notice or, barring that, avoiding offense.
-Some half-orcs rise to become proud leaders of orc communities. Some venture into the world to prove their worth. Many of these become adventurers, achieving greatness for their mighty deeds.
-To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lof of the tiefling.
-Nomadic, lion-like humanoids who rarely interact with other peoples, having all the need in their shimmer homeland.
-Satyrs embody a fusion of humanoid civilization with the freedom of wild beasts.
-Like owls, owlin are graced with feathers that make no sound when they move or fly, making it easy for them to sneak up on you in the library.
-A winged people who originated on the Elemental Plane of Air, Aarakocra soar through the sky wherever they wander.
+<html>Dragonborn look very much like dragons standing erect in humanoid form,though they lack wings or a tail.
+<html>Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.
+<html>Elves are a magical people of otherworldy grace, living in the world but not entirely part of it.
+<html>Half-elves combine what some say are the best qualities of their elf and human parents.
+<html>Humans are the most adaptable and ambitious people among the common races. Whatever drives them, humans are the innovators, the achievers, and the pioneers of the worlds.
+<html>A Gnome's enery and enthusiasm for living shines through every inch of his or her tiny body.
+<html>The diminutive halfings survive in a world full of larger creatures by avoiding notice or, barring that, avoiding offense.
+<html>Some half-orcs rise to become proud leaders of orc communities. Some venture into the world to prove their worth. Many of these become adventurers, achieving greatness for their mighty deeds.
+<html>To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lof of the tiefling.
+<html>Nomadic, lion-like humanoids who rarely interact with other peoples, having all the need in their shimmer homeland.
+<html>Satyrs embody a fusion of humanoid civilization with the freedom of wild beasts.
+<html>Like owls, owlin are graced with feathers that make no sound when they move or fly, making it easy for them to sneak up on you in the library.
+<html>A winged people who originated on the Elemental Plane of Air, Aarakocra soar through the sky wherever they wander.
 Whetehr descended from a celestial being or infused with heavenly power, aasimar are mortals who carry a spark of the Upper Planes within their souls.
 Embodying many of the airy traits of their otherworldy ancestors, Air Genasi can draw upon their connection to the winds.
 Despite their formidable build, bugbears are quiet skulkers, thanks to a fey magic that allows them to hide in spaces seemingly too small for them.
