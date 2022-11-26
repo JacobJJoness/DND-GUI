@@ -62,13 +62,12 @@ public class FileHandler {
 
     /**
      * Writes the values in the items String array 
-     * into a target output text file.
-     * 
-     * @param path the path to the output text file
-     * 
-     * @exception IOException unable to write items into target output text file
+     * into a target output text file located in a 
+     * user's 'Downloads' directory.
      * 
      * @param items
+     * 
+     * @exception IOException unable to write items into target output text file
      */
     public void writeFile(String[] items) {
         String path = "Downloads";

@@ -18,8 +18,6 @@ import java.util.*;
 public class PlayerCharacter {
     private static final String[] STAT_LABELS = {"Int: ", " Dex: ", " Str: ", " Con: ", " Chr: ", " Wis: "}; //attribute labels
 
-    //--------------------------------//
-
     private static final String FIRST_PATH = "files/firstnames.txt"; //path to text file containing first names
     private static final String LAST_PATH = "files/lastnames.txt"; //path to text file containing last names
     private static final String CLASS_PATH = "files/classes.txt"; //path to text file containing classes
@@ -326,8 +324,12 @@ public class PlayerCharacter {
         return isEqual;
     }
 
-    //----------------------------------//
-
+    /**
+     * Returns a PlayerCharacter's attributes separated 
+     * with stat labels for easy identification.
+     * 
+     * @return Fancy String version of PlayerCharacter attributes
+     */
     private String getDisplayAttributes() { 
         String temp = "";
         for(int i = 0; i < 6; i++) {
@@ -336,6 +338,11 @@ public class PlayerCharacter {
         return temp;
     }
 
+    /**
+     * Returns a PlayerCharacter's attributes separated with spaces.
+     * 
+     * @return Normal String version of PlayerCharacter attributes
+     */
     private String getStringAttributes() { 
         String temp = "";
         for(int i = 0; i < 6; i++) {
@@ -344,15 +351,32 @@ public class PlayerCharacter {
         return temp;
     }
 
-    //quick choice display without extended attributes if needed
+    /**
+     * Returns the display String of a single PlayerCharacter 
+     * object without attributes.
+     * 
+     * @return Shortened String version of PlayerCharacter object
+     */
     public String getChoiceString() {
         return String.format("%s %s %s", getName(), getClassType(), getRaceType());
     }
 
+    /**
+     * Returns the display String of a single PlayerCharacter object 
+     * without the race description.
+     * 
+     * @return Shortened String version of PlayerCharacter object 
+     */
     public String getDisplayString() {
         return String.format("%s %s %s %s", getName(), getClassType(), getRaceType(), getDisplayAttributes());
     }
 
+    /**
+     * Overrides the toString() method for a PlayerCharacter 
+     * object.
+     * 
+     * @return Full String version of a PlayerCharacter object
+     */
     @Override
     public String toString() {
         return String.format("%s%n%s%n%s%n%s%n%s%n%s", getFirstName(), getLastName(), getClassType(), getRaceType(), getStringAttributes(), getDescType());

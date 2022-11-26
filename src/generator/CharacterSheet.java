@@ -19,7 +19,7 @@ public class CharacterSheet {
     private static final int MAX_SIZE = 20; //CONSTANT - MAX NUMBER OF PLAYERCHARACTERS 
 
     private ArrayList <PlayerCharacter> characterList; //list of PlayerCharacter objects
-    private String[] displayList; //string list of PlayerCharacter objects
+    private String[] displayList; //String list of PlayerCharacter objects
 
     /**
      * Default Constructor for CharacterSheet.
@@ -28,11 +28,19 @@ public class CharacterSheet {
         characterList = new ArrayList<PlayerCharacter>();
     }
 
+    /**
+     * Clears the Arraylist of PlayerCharacter objects and then 
+     * updates the resulting String array displayList.
+     */
     public void clearList() {
         characterList.clear();
         updateDisplayList();
     }
 
+    /**
+     * Updates the displayList array to reflect any changes
+     * to the characterList.
+     */
     private void updateDisplayList() {
         displayList = new String[characterList.size()];
 
@@ -41,6 +49,12 @@ public class CharacterSheet {
         }
     }
 
+    /**
+     * Adds a new PlayerCharacter to the CharacterSheet through 
+     * the characterList and displayList.
+     * 
+     * @param pc
+     */
     public void addPlayerCharacter(PlayerCharacter pc) {
         if(!characterList.contains(pc)) {
             characterList.add(pc);
@@ -50,6 +64,12 @@ public class CharacterSheet {
         }
     }
 
+    /**
+     * Removes a PlayerCharacter from the CharacterSheet through 
+     * the characterList and displayList.
+     * 
+     * @param pc
+     */
     public void removePlayerCharacter(PlayerCharacter pc) {
         if(characterList.contains(pc)) {
             characterList.remove(pc);
@@ -57,7 +77,6 @@ public class CharacterSheet {
         } else {
             System.out.println("Error! Cannot remove ungenerated characters from the list");
         }
-        
     }
 
     /**
@@ -72,10 +91,10 @@ public class CharacterSheet {
     }
 
     /**
-     * Returns the displayList, which is a String array of 
-     * PlayerCharacters that can be found in the characterList.
+     * Returns the characterList, which is an ArrayList of 
+     * PlayerCharacters.
      * 
-     * @return displayList
+     * @return characterList
      */
     public ArrayList<PlayerCharacter> getCharacterList() {
         return characterList;
@@ -83,9 +102,7 @@ public class CharacterSheet {
 
     /**
      * Exports the characterList into an output text 
-     * file designed by the String path.
-     * 
-     * @param path
+     * file in a user's 'Downloads' directory.
      */
     public void exportCharacterList() {
         FileHandler fileHandler = new FileHandler();
@@ -120,6 +137,8 @@ public class CharacterSheet {
      * 
      * @param list
      * @param fileSize
+     * @exception IllegalArgumentExcpetion character input is not 
+     *            formatted correctly in list
      */
     private void convertToPlayers(String[] list, int fileSize) {
         try {
@@ -152,7 +171,6 @@ public class CharacterSheet {
         for(int i = 0; i < 6; i++) {
             temp[i] = Integer.parseInt(s[i]);
         }
-
         return temp;
     }
 }
