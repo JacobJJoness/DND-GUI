@@ -138,17 +138,7 @@ public class CharacterSheet {
      * @param pc
      */
     private void convertToList(PlayerCharacter pc) {
-        String temp = "";
-        for(int x: pc.getAttributes()){
-            temp += x + " ";
-        }
-
-        displayList[location++] = pc.getFirstName();
-        displayList[location++] = pc.getLastName();
-        displayList[location++] = pc.getClassType();
-        displayList[location++] = pc.getRaceType();
-        displayList[location++] = temp;
-        displayList[location++] = pc.getDescType();
+        displayList[location++] = pc.toString();
     }
 
     /**

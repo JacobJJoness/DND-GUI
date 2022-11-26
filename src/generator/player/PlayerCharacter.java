@@ -16,6 +16,10 @@ import java.util.*;
  * @since November 20, 2022
  */
 public class PlayerCharacter {
+    private static final String[] STAT_LABELS = {"Int: ", " Dex: ", " Str: ", " Con: ", " Chr: ", " Wis: "}; //attribute labels
+
+    //--------------------------------//
+
     private static final String FIRST_PATH = "files/firstnames.txt"; //path to text file containing first names
     private static final String LAST_PATH = "files/lastnames.txt"; //path to text file containing last names
     private static final String CLASS_PATH = "files/classes.txt"; //path to text file containing classes
@@ -320,5 +324,37 @@ public class PlayerCharacter {
         }
 
         return isEqual;
+    }
+
+    //----------------------------------//
+
+    private String getDisplayAttributes() { 
+        String temp = "";
+        for(int i = 0; i < 6; i++) {
+            temp += STAT_LABELS[i] + attributes[i];
+        }
+        return temp;
+    }
+
+    private String getStringAttributes() { 
+        String temp = "";
+        for(int i = 0; i < 6; i++) {
+            temp += attributes[i] + " ";
+        }
+        return temp;
+    }
+
+    //quick choice display without extended attributes if needed
+    public String getChoiceString() {
+        return String.format("%s %s %s", getName(), getClassType(), getRaceType());
+    }
+
+    public String getDisplayString() {
+        return String.format("%s %s %s %s", getName(), getClassType(), getRaceType(), getDisplayAttributes());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s%n%s%n%s%n%s%n%s%n%s", getFirstName(), getLastName(), getClassType(), getRaceType(), getStringAttributes(), getDescType());
     }
 }
