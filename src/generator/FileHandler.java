@@ -51,6 +51,11 @@ public class FileHandler {
         } catch(FileNotFoundException e) {
             System.out.println("Error! " + path + " was not found");
         }
+
+        if(fileSize == 0) {
+            System.out.println("Error! The input file is empty");
+            items = null;
+        }
         
         return items;
     }
@@ -72,7 +77,7 @@ public class FileHandler {
             File f = new File(new File(home, "Downloads"), "ouput.txt");
             path = f.getPath();
             FileWriter writer = new FileWriter(path);
-            for(int i = 0; i < MAX_ITEMS; i++) {
+            for(int i = 0; i < items.length; i++) {
                 writer.write(items[i] + "\n");
             }
             writer.close();

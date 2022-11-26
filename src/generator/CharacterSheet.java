@@ -17,128 +17,47 @@ import java.util.ArrayList;
  */
 public class CharacterSheet {
     private static final int MAX_SIZE = 20; //CONSTANT - MAX NUMBER OF PLAYERCHARACTERS 
-    private static final int MAX_ITEMS = 120; //CONSTANT - MAX NUMBER OF ITEMS
 
     private ArrayList <PlayerCharacter> characterList; //list of PlayerCharacter objects
     private String[] displayList; //string list of PlayerCharacter objects
-    private int fileSize; //size of file list
-    private int location; //current location in file list
 
     /**
      * Default Constructor for CharacterSheet.
      */
     public CharacterSheet() {
         characterList = new ArrayList<PlayerCharacter>();
-        displayList = new String[MAX_ITEMS];
-        clearDisplayList();
     }
 
-    /**
-     * Clears the Arraylist of PlayerCharacter objects and then 
-     * fills the String array displayList with all empty Strings.
-     */
-    public void clearDisplayList() {
+    public void clearList() {
         characterList.clear();
-        fileSize = 0;
-        location = 0;
-        fillEmptyList();
+        updateDisplayList();
     }
 
-    /**
-     * Fills the entire String array displayList with all empty 
-     * String values.
-     */
-    private void fillEmptyList() {
-        String temp = "";
-        for(int i = 0; i < MAX_ITEMS; i++) {
-            displayList[i] = temp;
+    private void updateDisplayList() {
+        displayList = new String[characterList.size()];
+
+        for(int i = 0; i < characterList.size(); i++) {
+            displayList[i] = characterList.get(i).toString();
         }
     }
 
-    /**
-     * Updates the displayList array to reflect a new addition 
-     * to the characterList.
-     * 
-     * @param pc
-     */
-    public void updateDisplayList(PlayerCharacter pc) {
-        if(!characterList.isEmpty()) {
-           convertToList(pc);
+    public void addPlayerCharacter(PlayerCharacter pc) {
+        if(!characterList.contains(pc)) {
+            characterList.add(pc);
+            updateDisplayList();
         } else {
-            clearDisplayList();
+            System.out.println("Error! Cannot add duplicate characters to the list");
         }
     }
 
-
-    /**
-     * Adds a new PlayerCharacter to the CharacterSheet through 
-     * the characterList and displayList. Then, returns a message 
-     * as a String about the resulting outcome of the method.
-     * 
-     * @param pc
-     * 
-     * @return Character was succesfully added to the list.
-     * @return Character is already in the list.
-     * @return Max number of characters reached. Please remove an existing character or create a new list.
-     */
-    public String addPlayerCharacter(PlayerCharacter pc) {
-        if(characterList.size() < MAX_SIZE + 1) {
-            if(!characterList.contains(pc)) {
-                characterList.add(pc);
-                fileSize++;
-                convertToList(pc);
-                return "Character was succesfully added to the list.";
-            }
-            return "Character is already in the list.";
+    public void removePlayerCharacter(PlayerCharacter pc) {
+        if(characterList.contains(pc)) {
+            characterList.remove(pc);
+            updateDisplayList();
+        } else {
+            System.out.println("Error! Cannot remove ungenerated characters from the list");
         }
-        return "Max number of characters reached. Please remove an existing character or create a new list.";
-    }
-
-    /**
-     * Removes a PlayerCharacter from the CharacterSheet through 
-     * the characterList and displayList. Then, returns a message 
-     * as a String about the resulting outcome of the method.
-     * 
-     * @param pc
-     * 
-     * @return Character was successfully removed from the list.
-     * @return Character was not found in the list.
-     * @return Cannot remove Character from an empty list.
-     */
-    public String removePlayerCharacter(PlayerCharacter pc) {
-        if(!characterList.isEmpty()) {
-            if(characterList.contains(pc)) {
-                int pos = searchCharacterList(pc);
-                displayList[pos] = "";
-                characterList.remove(pc);
-                return "Character was successfully removed from the list.";
-            }
-            return "Character was not found in the list.";
-        } 
-        return "Cannot remove Character from an empty list.";
-    }
-
-
-    /**
-     * Searches the characterList for a specific PlayerCharacter 
-     * and then returns its position in the ArrayList.
-     * 
-     * @param pc
-     * 
-     * @return position of PlayerCharacter in characterList
-     */
-    public int searchCharacterList(PlayerCharacter pc) {
-        return characterList.indexOf(pc);
-    }
-
-    /**
-     * Converts a PlayerCharacter in the characterList 
-     * into the displayList as a String array.
-     * 
-     * @param pc
-     */
-    private void convertToList(PlayerCharacter pc) {
-        displayList[location++] = pc.toString();
+        
     }
 
     /**
@@ -148,7 +67,18 @@ public class CharacterSheet {
      * @return displayList
      */
     public String[] getDisplayList() {
+        updateDisplayList();
         return displayList;
+    }
+
+    /**
+     * Returns the displayList, which is a String array of 
+     * PlayerCharacters that can be found in the characterList.
+     * 
+     * @return displayList
+     */
+    public ArrayList<PlayerCharacter> getCharacterList() {
+        return characterList;
     }
 
     /**
@@ -172,7 +102,15 @@ public class CharacterSheet {
     public void importCharacterList(String path) {
         FileHandler fileHandler = new FileHandler();
         String[] list = fileHandler.readFile(path);
-        convertToPlayers(list, fileHandler.getFileSize());
+        int size = fileHandler.getFileSize();
+
+        if(size == 0) {
+            System.out.println("Import failed! Your input file is empty");
+        } else if(size > MAX_SIZE * 6) {
+            System.out.println("Import failed! Your input file is too large");
+        } else {
+            convertToPlayers(list, size);
+        }
     }
 
     /**
@@ -184,20 +122,20 @@ public class CharacterSheet {
      * @param fileSize
      */
     private void convertToPlayers(String[] list, int fileSize) {
-        if(fileSize % 6 != 0) 
-            System.out.println("File is not formatted correctly.");
-        else {
-            for(int i = 0; i < fileSize * 6; i+=1) {
-                String fname = list[i++];
-                String lname = list[i++];
-                String pclas = list[i++];
-                String prace = list[i++];
-                int[] stats = convertToIntegerArray(list[i++]);
-                String desc = list[i];
+        try {
+            for(int i = 0; i < fileSize; i+=6) {
+                String f = list[i];
+                String l = list[i+1];
+                String c = list[i+2];
+                String r = list[i+3];
+                int [] s = convertToIntegerArray(list[i+4]);
+                String d = list[i+5];
 
-                PlayerCharacter pc = new PlayerCharacter(lname, pclas, pclas, prace, stats, desc);
-                String output = addPlayerCharacter(pc);
+                PlayerCharacter pc = new PlayerCharacter(f, l, c, r, s, d);
+                addPlayerCharacter(pc);
             }
+        } catch(IllegalArgumentException e) {
+            System.out.println("Error! Unexpected character information recieved");
         }
     }
 
