@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 //import javax.swing.border.EmptyBorder;
 import java.awt.Font;
@@ -19,6 +21,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 //import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -65,6 +69,7 @@ class Frame extends JFrame implements ActionListener {
     JPanel genPanel;
     JPanel infoPanel;
     JPanel disPanel;
+    JPanel helPanel;
 
     //initializing labels
     JLabel intStatDisp; //stat
@@ -120,8 +125,18 @@ class Frame extends JFrame implements ActionListener {
         characterImagePanel(background);
         informationPanel(background);
         displayPanel(background);
+        helPanel(background);
         
         pack();
+    }
+
+    private void helPanel(JLabel item) {
+        helPanel = new JPanel();
+        helPanel.setBounds(0,250,500,250);
+        helPanel.setPreferredSize(new Dimension(300,400));
+
+        helPanel.setBackground(panelColor);//A value determines transparency
+        item.add(new AlphaContainer(helPanel));
     }
 
     ////
@@ -130,8 +145,13 @@ class Frame extends JFrame implements ActionListener {
         disPanel = new JPanel();
 
         //size and bounds of display panel
-        disPanel.setBounds(0, 0, 500, 500);
-        disPanel.setPreferredSize(new Dimension(910, 650));
+        disPanel.setBounds(0, 0, 500, 300);
+        disPanel.setPreferredSize(new Dimension(605, 400));
+        TitledBorder listBorder = BorderFactory.createTitledBorder("List of Saved Characters");
+        listBorder.setTitleColor(Color.WHITE);
+        listBorder.setTitleJustification(TitledBorder.LEFT);
+        disPanel.setBorder(listBorder);
+        
 
         setCharacterSheet(disPanel);
 
@@ -146,9 +166,9 @@ class Frame extends JFrame implements ActionListener {
 
         //initialization of list
         pcList = new JList(pcModel);
-        pcList.setVisibleRowCount(15);
-        pcList.setFixedCellHeight(20);
-        pcList.setFixedCellWidth(750);
+        pcList.setVisibleRowCount(8);
+        pcList.setFixedCellHeight(30);
+        pcList.setFixedCellWidth(500);
         pcList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         //initialization of scroll list
@@ -358,7 +378,6 @@ class Frame extends JFrame implements ActionListener {
     private void setCharacterSheet(JPanel item) {
          pcSheet = new JLabel();
 
-         pcSheet.setText("Character Sheet:");
          pcSheet.setHorizontalAlignment(SwingConstants.LEFT);
          pcSheet.setFont(new Font("New Peninim MT",Font.ITALIC,20));
 
