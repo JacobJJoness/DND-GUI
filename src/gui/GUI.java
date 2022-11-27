@@ -72,8 +72,8 @@ class Frame extends JFrame implements ActionListener {
     Frame() {
         //adjusts frame to screensize
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenHeight = screenSize.height / 5;
-        int screenWidth = screenSize.width / 5;
+        int screenHeight = screenSize.height;
+        int screenWidth = 19 * screenSize.width / 20;
         
         setTitle("\"Dungeons & Dragons\" Random Character Generator"); //sets application title
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //controls how exit works, also HIDE_ON_CLOSE and NOTHING_ON_CLOSE
@@ -90,8 +90,8 @@ class Frame extends JFrame implements ActionListener {
 
         // background picture
         ImageIcon backImg = new ImageIcon("images/background.jpg");
-        Image scaleImage = backImg.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_DEFAULT);
-        JLabel background = new JLabel("",backImg,JLabel.CENTER);
+        ImageIcon scaleImage = new ImageIcon(backImg.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_DEFAULT));
+        JLabel background = new JLabel("",scaleImage,JLabel.CENTER);
         background.setBounds(0,0,screenWidth,screenHeight);
         background.setLayout(new FlowLayout());
         
