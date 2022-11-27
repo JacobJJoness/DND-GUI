@@ -49,19 +49,25 @@ public class CharacterSheet {
         }
     }
 
+
     /**
      * Adds a new PlayerCharacter to the CharacterSheet through 
      * the characterList and displayList.
      * 
      * @param pc
      */
-    public void addPlayerCharacter(PlayerCharacter pc) {
+    public boolean addPlayerCharacter(PlayerCharacter pc) {
         if(!characterList.contains(pc)) {
-            characterList.add(pc);
-            updateDisplayList();
-        } else {
-            System.out.println("Error! Cannot add duplicate characters to the list");
-        }
+            if(!(characterList.size() > MAX_SIZE)) {
+                characterList.add(pc);
+                updateDisplayList();
+                return true;
+            }
+            System.out.println("Error! Max characters in list reached");
+            return false;
+        } 
+        System.out.println("Error! Cannot add duplicate characters to the list");
+        return false;
     }
 
     /**
@@ -70,13 +76,16 @@ public class CharacterSheet {
      * 
      * @param pc
      */
-    public void removePlayerCharacter(PlayerCharacter pc) {
+    public boolean removePlayerCharacter(PlayerCharacter pc) {
         if(characterList.contains(pc)) {
             characterList.remove(pc);
             updateDisplayList();
-        } else {
-            System.out.println("Error! Cannot remove ungenerated characters from the list");
+            return true;
         }
+        
+        System.out.println("Error! Cannot remove ungenerated characters from the list");
+        
+        return false;
     }
 
     /**
@@ -172,5 +181,16 @@ public class CharacterSheet {
             temp[i] = Integer.parseInt(s[i]);
         }
         return temp;
+    }
+
+    /**
+     * Returns the PlayerCharacetr object at a specific 
+     * position in the character list.
+     * 
+     * @param pos
+     * @return PlayerCharacter object at pos
+     */
+    public PlayerCharacter getPlayerCharacter(int pos) {
+        return characterList.get(pos);
     }
 }

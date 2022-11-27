@@ -6,15 +6,22 @@ import generator.player.PlayerCharacter;
 import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+
+//import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
@@ -48,11 +55,16 @@ class Frame extends JFrame implements ActionListener {
     JButton generator; 
     JButton save;
     JButton export;
+    JButton remove; //
+    //JButton select; //
+    JButton help; //
+    
 
     //initializing panels
     JPanel charaPanel;
     JPanel genPanel;
     JPanel infoPanel;
+    JPanel disPanel;
 
     //initializing labels
     JLabel intStatDisp; //stat
@@ -65,6 +77,12 @@ class Frame extends JFrame implements ActionListener {
     JLabel classType; //character class
     JLabel race; //character race
     JLabel desc; //character description
+
+    //initializing list of PlayerCharacters
+    JList pcList; //PlayerCharacter list
+    JScrollPane pcPane;
+    DefaultListModel pcModel; 
+    JLabel pcSheet;
 
     /**
      * Default Constructor for Frame object.
@@ -84,7 +102,7 @@ class Frame extends JFrame implements ActionListener {
 
         setLayout(new FlowLayout()); //sets layout to new default FlowLayout
 
-        //code for setting our own Icon Style--NOT YET COMPLETE
+        //code for setting our own Icon Style
         ImageIcon logoImage = new ImageIcon("images/logo.png");
         setIconImage(logoImage.getImage());
 
@@ -101,8 +119,53 @@ class Frame extends JFrame implements ActionListener {
         generatorPanel(background);
         characterImagePanel(background);
         informationPanel(background);
+        displayPanel(background);
         
         pack();
+    }
+
+    ////
+    private void displayPanel(JLabel item) {
+        //panel structure and style
+        disPanel = new JPanel();
+
+        //size and bounds of display panel
+        disPanel.setBounds(0, 0, 500, 500);
+        disPanel.setPreferredSize(new Dimension(910, 650));
+
+        setCharacterSheet(disPanel);
+
+        //list model initialization 
+        pcModel = new DefaultListModel();
+        ArrayList<PlayerCharacter> tempDisList = characterList.getCharacterList();
+
+        //add to model list
+        for(int i = 0; i < tempDisList.size(); i++) {
+            pcModel.addElement(tempDisList.get(i).getDisplayString());
+        }
+
+        //initialization of list
+        pcList = new JList(pcModel);
+        pcList.setVisibleRowCount(15);
+        pcList.setFixedCellHeight(20);
+        pcList.setFixedCellWidth(750);
+        pcList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        //initialization of scroll list
+        pcPane = new JScrollPane(pcList);
+        disPanel.add(pcPane);
+
+
+        //button for removing character
+        remove = new JButton();
+        remove.setText("Remove");
+        remove.addActionListener(this);
+        remove.setFocusable(false);
+        disPanel.add(remove);
+
+        //code to wrap panel to make it partially transparent
+        disPanel.setBackground(panelColor);//A value determines transparency
+        item.add(new AlphaContainer(disPanel));
     }
 
     /**
@@ -204,7 +267,7 @@ class Frame extends JFrame implements ActionListener {
      * 
      * @param item
      */
-    private void setRaceLabel(JPanel item){
+    private void setRaceLabel(JPanel item) {
         race = new JLabel();
         race.setText("Race: "+ randomCharacter.getRaceType());
         race.setFont(new Font("New Peninim MT",Font.ITALIC,20));
@@ -216,7 +279,7 @@ class Frame extends JFrame implements ActionListener {
      * 
      * @param item
      */
-    private void setDescLabel(JPanel item){
+    private void setDescLabel(JPanel item) {
         desc = new JLabel();
         String temp = "<html>" + randomCharacter.getDescType() + "</html>";
         desc.setText(temp);
@@ -229,7 +292,7 @@ class Frame extends JFrame implements ActionListener {
      * 
      * @param item
      */
-    private void setClassLabel(JPanel item){
+    private void setClassLabel(JPanel item) {
         classType = new JLabel();
         classType.setVerticalAlignment(JLabel.CENTER);
         classType.setText("Class: " + randomCharacter.getClassType() );
@@ -242,7 +305,7 @@ class Frame extends JFrame implements ActionListener {
      * 
      * @param item
      */
-    private void setNameLabel(JPanel item){
+    private void setNameLabel(JPanel item) {
         name = new JLabel();
         name.setText( randomCharacter.getName() );
         name.setHorizontalAlignment(JLabel.CENTER);
@@ -255,7 +318,7 @@ class Frame extends JFrame implements ActionListener {
      * 
      * @param item
      */
-    private void setStatLabels(JPanel item){
+    private void setStatLabels(JPanel item) {
         //storing then accessing stats
         int[] stats = randomCharacter.getAttributes(); //grabbing character stats
 
@@ -292,10 +355,20 @@ class Frame extends JFrame implements ActionListener {
         item.add(wisStatDisp);
     }
 
+    private void setCharacterSheet(JPanel item) {
+         pcSheet = new JLabel();
+
+         pcSheet.setText("Character Sheet:");
+         pcSheet.setHorizontalAlignment(SwingConstants.LEFT);
+         pcSheet.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+
+         item.add(pcSheet);
+    }
+
     /**
      * Updates the stats label.
      */
-    private void updateStatLabels(){
+    private void updateStatLabels() {
         //accessing stat labels and updating when generate is used
         int[] stats = randomCharacter.getAttributes(); 
 
@@ -318,14 +391,14 @@ class Frame extends JFrame implements ActionListener {
     /**
      * Updates the class label.
      */
-    private void updateClassLabel(){
+    private void updateClassLabel() {
         classType.setText("Class: " + randomCharacter.getClassType());
     }
 
     /**
      * Updates the race label.
      */
-    private void updateRaceLabel(){
+    private void updateRaceLabel() {
         race.setText("Race: "+ randomCharacter.getRaceType());
     }
 
@@ -346,7 +419,7 @@ class Frame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //generates a new character
-        if(e.getSource() == generator){
+        if(e.getSource() == generator) {
             randomCharacter = new PlayerCharacter();
             updateStatLabels();
             updateNameLabel();
@@ -356,9 +429,21 @@ class Frame extends JFrame implements ActionListener {
         }
 
         //saves a character to the character sheet
-        if(e.getSource() == save){
-            FileHandler outputter = new FileHandler();
-            characterList.addPlayerCharacter(randomCharacter);
+        if(e.getSource() == save) {
+            if(characterList.addPlayerCharacter(randomCharacter)) {
+                pcModel.addElement(randomCharacter.getDisplayString());
+            }
+        }
+
+        //saves a character to the character sheet
+        if(e.getSource() == remove) {
+            int[] pos = pcList.getSelectedIndices();
+            
+            for(int i = (pos.length-1); i >=0; i--) {
+                if(characterList.removePlayerCharacter(characterList.getPlayerCharacter(pos[i]))) {
+                    pcModel.remove(pos[i]);
+                }
+            }
         }
 
         //exports the character sheet to an output text file

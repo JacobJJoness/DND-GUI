@@ -368,7 +368,7 @@ public class PlayerCharacter {
      * @return Shortened String version of PlayerCharacter object 
      */
     public String getDisplayString() {
-        return String.format("%s %s %s %s", getName(), getClassType(), getRaceType(), getDisplayAttributes());
+        return String.format("Name: %s, Class: %s, Race: %s, %s", getName(), getClassType(), getRaceType(), getDisplayAttributes());
     }
 
     /**
