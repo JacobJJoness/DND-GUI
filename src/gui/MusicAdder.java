@@ -2,7 +2,7 @@ package gui;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -12,6 +12,7 @@ import java.util.*;
 
 public class MusicAdder {
     
+
     MusicAdder() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
         File file = new File("C:/Users/genja/OneDrive/Documents/GitHub/DND-GUI/files/theme.wav");
@@ -19,6 +20,10 @@ public class MusicAdder {
         Clip clip = AudioSystem.getClip();
         clip.open(audioStream);
         clip.start();
+
+       
+        
+       
     }
 }
 

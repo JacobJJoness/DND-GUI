@@ -42,6 +42,16 @@ import java.awt.Image;
 public class GUI {
     public static void main(String[] args) {
         Frame frame = new Frame();
+        try{
+            MusicAdder test = new MusicAdder();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("failed");
+
+        }
+        
     }
 }
 
