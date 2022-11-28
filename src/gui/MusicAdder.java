@@ -15,7 +15,7 @@ public class MusicAdder {
 
     MusicAdder() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
-        File file = new File("C:/Users/genja/OneDrive/Documents/GitHub/DND-GUI/files/theme.wav");
+        File file = new File("files/theme.wav");
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
         Clip clip = AudioSystem.getClip();
         clip.open(audioStream);
