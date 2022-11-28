@@ -89,6 +89,12 @@ class Frame extends JFrame implements ActionListener {
     DefaultListModel pcModel; 
     JLabel pcSheet;
 
+    //initializing generator display
+    JList genList;
+    JScrollPane genPane;
+    DefaultListModel genModel;
+    JLabel genSheet;
+
     /**
      * Default Constructor for Frame object.
      */
@@ -122,8 +128,8 @@ class Frame extends JFrame implements ActionListener {
 
         //content panels
         generatorPanel(background);
-        characterImagePanel(background);
-        informationPanel(background);
+        //characterImagePanel(background);
+        //informationPanel(background);
         displayPanel(background);
         helPanel(background);
         
@@ -147,12 +153,14 @@ class Frame extends JFrame implements ActionListener {
         //size and bounds of display panel
         disPanel.setBounds(0, 0, 500, 300);
         disPanel.setPreferredSize(new Dimension(605, 400));
+
+        //title border
         TitledBorder listBorder = BorderFactory.createTitledBorder("List of Saved Characters");
         listBorder.setTitleColor(Color.WHITE);
-        listBorder.setTitleJustification(TitledBorder.LEFT);
+        listBorder.setTitleJustification(TitledBorder.CENTER);
         disPanel.setBorder(listBorder);
         
-
+        //add character sheet to panel
         setCharacterSheet(disPanel);
 
         //list model initialization 
@@ -166,7 +174,7 @@ class Frame extends JFrame implements ActionListener {
 
         //initialization of list
         pcList = new JList(pcModel);
-        pcList.setVisibleRowCount(8);
+        pcList.setVisibleRowCount(10);
         pcList.setFixedCellHeight(30);
         pcList.setFixedCellWidth(500);
         pcList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -175,13 +183,19 @@ class Frame extends JFrame implements ActionListener {
         pcPane = new JScrollPane(pcList);
         disPanel.add(pcPane);
 
-
         //button for removing character
         remove = new JButton();
         remove.setText("Remove");
         remove.addActionListener(this);
         remove.setFocusable(false);
         disPanel.add(remove);
+
+        //button for exporting character sheet
+        export = new JButton();
+        export.setText("Export");//text inside button
+        export.addActionListener(this);//adding button action
+        export.setFocusable(false);//removing a default box around text
+        disPanel.add(export);//adding button to panel
 
         //code to wrap panel to make it partially transparent
         disPanel.setBackground(panelColor);//A value determines transparency
@@ -199,8 +213,16 @@ class Frame extends JFrame implements ActionListener {
         genPanel = new JPanel();
         
         //size and bounds of generator panel
-        genPanel.setBounds(0,0,250,250);
+        genPanel.setBounds(0,0,290,300);
         genPanel.setPreferredSize(new Dimension(300,400));
+
+        TitledBorder generatorBorder = BorderFactory.createTitledBorder("Character Generator");
+        generatorBorder.setTitleColor(Color.WHITE);
+        generatorBorder.setTitleJustification(TitledBorder.CENTER);
+        genPanel.setBorder(generatorBorder);
+
+        characterImagePanel(genPanel);
+        informationPanel(genPanel);
 
         //Button for character generation
         generator = new JButton();
@@ -216,14 +238,6 @@ class Frame extends JFrame implements ActionListener {
         save.setFocusable(false);
         genPanel.add(save);
 
-        //button for exporting character sheet
-        export = new JButton();
-        export.setText("Export");//text inside button
-        export.addActionListener(this);//adding button action
-        export.setFocusable(false);//removing a default box around text
-        genPanel.add(export);//adding button to panel
-
-        //code to wrap panel to make it partially transparent
         genPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(genPanel));
     }
@@ -235,11 +249,11 @@ class Frame extends JFrame implements ActionListener {
      * 
      * @param item
      */
-    private void characterImagePanel(JLabel item) {
+    private void characterImagePanel(JPanel item) {
         //Created a new character information panel
         charaPanel = new JPanel();
-        charaPanel.setBounds(250,0,250,250);
-        charaPanel.setPreferredSize(new Dimension(300,400));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
+        charaPanel.setBounds(0,0,200,250);
+        charaPanel.setPreferredSize(new Dimension(250,160));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
         charaPanel.setLayout(new BoxLayout(charaPanel, BoxLayout.Y_AXIS));
 
         //adding name
@@ -250,10 +264,9 @@ class Frame extends JFrame implements ActionListener {
         setRaceLabel(charaPanel);
         //adding description label
         setDescLabel(charaPanel);
-        //code to wrap panel to make it partially transparent
-        charaPanel.setBackground(panelColor);//A value determines transparency
 
-        item.add(new AlphaContainer(charaPanel));
+        charaPanel.setBackground(Color.WHITE);//A value determines transparency
+        item.add(charaPanel);
     }
 
     /**
@@ -262,24 +275,24 @@ class Frame extends JFrame implements ActionListener {
      * 
      * @param item
      */
-    private void informationPanel(JLabel item) {
+    private void informationPanel(JPanel item) {
         //panel setup
         infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         
-        infoPanel.setBounds(0,250,500,250);
-        infoPanel.setPreferredSize(new Dimension(300,400));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
+        infoPanel.setBounds(0,220,100,100);
+        infoPanel.setPreferredSize(new Dimension(250,140));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
         //Header for panel
         JLabel statHeader = new JLabel();
-        statHeader.setText("Character Stats");
-        statHeader.setFont(new Font("New Peninim MT",Font.ITALIC,25));
+        statHeader.setText("Character Stats:");
+        statHeader.setFont(new Font("New Peninim MT",Font.BOLD,20));
 
         infoPanel.add(statHeader); //adding statistic labels
         setStatLabels(infoPanel); //adding generated stats
 
         //code to wrap panel to make it partially transparent
-        infoPanel.setBackground(panelColor);//A value determines transparency
-        item.add(new AlphaContainer(infoPanel));
+        infoPanel.setBackground(Color.WHITE);//A value determines transparency
+        item.add(infoPanel);
     }
     
     /**
@@ -290,7 +303,7 @@ class Frame extends JFrame implements ActionListener {
     private void setRaceLabel(JPanel item) {
         race = new JLabel();
         race.setText("Race: "+ randomCharacter.getRaceType());
-        race.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        race.setFont(new Font("New Peninim MT",Font.PLAIN,18));
         item.add(race);
     }
 
@@ -303,7 +316,7 @@ class Frame extends JFrame implements ActionListener {
         desc = new JLabel();
         String temp = "<html>" + randomCharacter.getDescType() + "</html>";
         desc.setText(temp);
-        desc.setFont(new Font("New Peninim MT",Font.ITALIC,18));
+        desc.setFont(new Font("New Peninim MT",Font.ITALIC,15));
         item.add(desc);
     }
 
@@ -316,7 +329,7 @@ class Frame extends JFrame implements ActionListener {
         classType = new JLabel();
         classType.setVerticalAlignment(JLabel.CENTER);
         classType.setText("Class: " + randomCharacter.getClassType() );
-        classType.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        classType.setFont(new Font("New Peninim MT",Font.PLAIN,18));
         item.add(classType);
     }
 
@@ -329,7 +342,7 @@ class Frame extends JFrame implements ActionListener {
         name = new JLabel();
         name.setText( randomCharacter.getName() );
         name.setHorizontalAlignment(JLabel.CENTER);
-        name.setFont(new Font("New Peninim MT",Font.ITALIC,25));
+        name.setFont(new Font("New Peninim MT",Font.BOLD,20));
         item.add(name);
     }
 
@@ -342,37 +355,38 @@ class Frame extends JFrame implements ActionListener {
         //storing then accessing stats
         int[] stats = randomCharacter.getAttributes(); //grabbing character stats
 
-        intStatDisp = new JLabel();
-        intStatDisp.setText("Int : " + stats[0]);//setting character stat to display generated stats
-        intStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        strStatDisp = new JLabel();
+        strStatDisp.setText("Strength: " + stats[2]);
+        strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
 
         dexStatDisp = new JLabel();
-        dexStatDisp.setText("Dex : " + stats[1]);
-        dexStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        dexStatDisp.setText("Dexterity: " + stats[1]);
+        dexStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
 
         conStatDisp = new JLabel();
-        conStatDisp.setText("Str: " + stats[2]);
-        conStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        conStatDisp.setText("Constitution: " + stats[3]);
+        conStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
 
-        chrStatDisp = new JLabel();
-        chrStatDisp.setText("Con: " + stats[3]);
-        chrStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
-
-        strStatDisp = new JLabel();
-        strStatDisp.setText("Chr: " + stats[4]);
-        strStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        intStatDisp = new JLabel();
+        intStatDisp.setText("Intelligence: " + stats[0]);//setting character stat to display generated stats
+        intStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
 
         wisStatDisp = new JLabel();
-        wisStatDisp.setText("Wis: " + stats[5]);
-        wisStatDisp.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+        wisStatDisp.setText("Wisdom: " + stats[5]);
+        wisStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
 
+        chrStatDisp = new JLabel();
+        chrStatDisp.setText("Charisma: " + stats[4]);
+        chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+
+    
         //adding all items
-        item.add(intStatDisp);
+        item.add(strStatDisp);
         item.add(dexStatDisp);
         item.add(conStatDisp);
-        item.add(chrStatDisp);
-        item.add(strStatDisp);
+        item.add(intStatDisp);
         item.add(wisStatDisp);
+        item.add(chrStatDisp);
     }
 
     private void setCharacterSheet(JPanel item) {
@@ -392,12 +406,12 @@ class Frame extends JFrame implements ActionListener {
         int[] stats = randomCharacter.getAttributes(); 
 
         //setting character stat to display generated stats
-        intStatDisp.setText("Int : " + stats[0]);
-        dexStatDisp.setText("Dex : " + stats[1]);
-        conStatDisp.setText("Str: " + stats[2]);
-        chrStatDisp.setText("Con: " + stats[3]);
-        strStatDisp.setText("Chr: " + stats[4]);
-        wisStatDisp.setText("Wis: " + stats[5]);
+        intStatDisp.setText("Intelligence: " + stats[0]);
+        dexStatDisp.setText("Dexterity: " + stats[1]);
+        conStatDisp.setText("Strength: " + stats[2]);
+        chrStatDisp.setText("Constitution: " + stats[3]);
+        strStatDisp.setText("Charisma: " + stats[4]);
+        wisStatDisp.setText("Wisdom: " + stats[5]);
     }
 
     /**

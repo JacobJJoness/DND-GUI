@@ -330,10 +330,10 @@ public class PlayerCharacter {
      * 
      * @return Fancy String version of PlayerCharacter attributes
      */
-    private String getDisplayAttributes() { 
+    public String getDisplayAttributes() { 
         String temp = "";
         for(int i = 0; i < 6; i++) {
-            temp += STAT_LABELS[i] + attributes[i];
+            temp += STAT_LABELS[i] + attributes[i] + "\n";
         }
         return temp;
     }
@@ -368,7 +368,17 @@ public class PlayerCharacter {
      * @return Shortened String version of PlayerCharacter object 
      */
     public String getDisplayString() {
-        return String.format("Name: %s, Class: %s, Race: %s, %s", getName(), getClassType(), getRaceType(), getDisplayAttributes());
+        return String.format("Name: %s, Class: %s, Race: %s, Stats: %s", getName(), getClassType(), getRaceType(), getStringAttributes());
+    }
+
+    /**
+     * Returns the display String of a single PlayerCharacter object 
+     * for the random character generator.
+     * 
+     * @return String version of PlayerCharacter object 
+     */
+    public String getGeneratorString() {
+        return String.format("Name: %s%nClass: %s%nRace: %s%n %s%s%n", getName(), getClassType(), getRaceType(), getDisplayAttributes(), getDescType());
     }
 
     /**
