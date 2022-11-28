@@ -15,17 +15,17 @@ public class Physical extends Attribute {
     
     private int[] physicalAttributes; //integer array containing a PlayerCharacter's physical stat attributes
     private int strength; //PlayerCharacter's strength attribute value
-    private int constitution; //PlayerCharacter's constitution attribute value
     private int dexterity; //PlayerCharacter's dexterity attribute value
-
+    private int constitution; //PlayerCharacter's constitution attribute value
+    
     /**
      * Default Constructor for Physical stat attributes.
      */
     public Physical() {
         physicalAttributes = new int[3];
-        setStrength();
-        setConstitution();
+        setStrength(); 
         setDexterity();
+        setConstitution();
         setAttributes();
     }
 
@@ -35,13 +35,13 @@ public class Physical extends Attribute {
      * and dexterity.
      * 
      * @param str
-     * @param con
      * @param dex
+     * @param con
      */
-    public Physical(int str, int con, int dex) {
+    public Physical(int str, int dex, int con) {
         strength = str;
-        constitution = con;
         dexterity = dex;
+        constitution = con;
         setAttributes();
     }
 
@@ -113,8 +113,8 @@ public class Physical extends Attribute {
      * to randomly generated integer values.
      */
     public void setAttributes() {
-        physicalAttributes[0] = getDexterity(); //adds dexterity to attributes array
-        physicalAttributes[1] = getStrength(); //adds strength to attributes array
+        physicalAttributes[0] = getStrength(); //adds strength to attributes array
+        physicalAttributes[1] = getDexterity(); //adds dexterity to attributes array
         physicalAttributes[2] = getConstitution(); //adds constituion to attributes array
     }
 

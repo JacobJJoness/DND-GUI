@@ -387,7 +387,7 @@ class Frame extends JFrame implements ActionListener {
         int[] stats = randomCharacter.getAttributes(); //grabbing character stats
 
         strStatDisp = new JLabel();
-        strStatDisp.setText("Strength: " + stats[2]);
+        strStatDisp.setText("Strength: " + stats[0]);
         strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         dexStatDisp = new JLabel();
@@ -395,19 +395,19 @@ class Frame extends JFrame implements ActionListener {
         dexStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         conStatDisp = new JLabel();
-        conStatDisp.setText("Constitution: " + stats[3]);
+        conStatDisp.setText("Constitution: " + stats[2]);
         conStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         intStatDisp = new JLabel();
-        intStatDisp.setText("Intelligence: " + stats[0]);//setting character stat to display generated stats
+        intStatDisp.setText("Intelligence: " + stats[3]);//setting character stat to display generated stats
         intStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         wisStatDisp = new JLabel();
-        wisStatDisp.setText("Wisdom: " + stats[5]);
+        wisStatDisp.setText("Wisdom: " + stats[4]);
         wisStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         chrStatDisp = new JLabel();
-        chrStatDisp.setText("Charisma: " + stats[4]);
+        chrStatDisp.setText("Charisma: " + stats[5]);
         chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
     
@@ -437,12 +437,12 @@ class Frame extends JFrame implements ActionListener {
         int[] stats = randomCharacter.getAttributes(); 
 
         //setting character stat to display generated stats
-        intStatDisp.setText("Intelligence: " + stats[0]);
+        strStatDisp.setText("Strength: " + stats[0]);
         dexStatDisp.setText("Dexterity: " + stats[1]);
-        conStatDisp.setText("Strength: " + stats[2]);
-        chrStatDisp.setText("Constitution: " + stats[3]);
-        strStatDisp.setText("Charisma: " + stats[4]);
-        wisStatDisp.setText("Wisdom: " + stats[5]);
+        conStatDisp.setText("Constitution: " + stats[2]);
+        intStatDisp.setText("Intelligence: " + stats[3]);
+        wisStatDisp.setText("Wisdom: " + stats[4]);
+        chrStatDisp.setText("Charisma: " + stats[5]);
     }
 
     /**

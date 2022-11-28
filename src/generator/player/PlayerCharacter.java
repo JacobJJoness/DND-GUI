@@ -241,7 +241,7 @@ public class PlayerCharacter {
     private void setPhysicalAttributes() {
         Physical p = new Physical();
         int[] temp = p.getAttributes();
-        int count = 1;
+        int count = 0;
         for(int x: temp) {
             attributes[count++] = x;
             sum += x;
@@ -254,12 +254,9 @@ public class PlayerCharacter {
     private void setMentalAttributes() {
         Mental m = new Mental();
         int[] temp = m.getAttributes();
-        int count = 0;
+        int count = 3;
         for(int x: temp) {
             attributes[count++] = x;
-            if(count == 1) {
-                count = 4;
-            }
             sum += x;
         }
     }
@@ -288,8 +285,8 @@ public class PlayerCharacter {
     private void generatePlayerAttributes() {
         while(sum < MIN_SUM || sum > MAX_SUM) {
             sum = 0;
-            setMentalAttributes();
             setPhysicalAttributes();
+            setMentalAttributes();
         }
     }
 

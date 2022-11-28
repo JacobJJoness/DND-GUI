@@ -113,8 +113,8 @@ public class Mental extends Attribute {
      */
     public void setAttributes() {
         mentalAttributes[0] = getIntelligence(); // adds intelligence to attributes array
-        mentalAttributes[1] = getCharisma(); // adds charisma to attributes array
-        mentalAttributes[2] = getWisdom(); // adds wisdom to attributes array
+        mentalAttributes[1] = getWisdom(); // adds wisdom to attributes array
+        mentalAttributes[2] = getCharisma(); // adds charisma to attributes array
     }
 
     /**
