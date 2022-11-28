@@ -70,6 +70,7 @@ class Frame extends JFrame implements ActionListener {
     JPanel infoPanel;
     JPanel disPanel;
     JPanel helPanel;
+    JPanel outputPanel;
 
     //initializing labels
     JLabel intStatDisp; //stat
@@ -132,16 +133,46 @@ class Frame extends JFrame implements ActionListener {
         //informationPanel(background);
         displayPanel(background);
         helPanel(background);
+        outputPanel(background);
         
         pack();
     }
 
+
+    private void outputPanel(JLabel item){
+        outputPanel = new JPanel();
+        outputPanel.setBounds(250,250,500,250);
+        outputPanel.setPreferredSize(new Dimension(300,400));
+
+        outputPanel.setBackground(panelColor);//A value determines transparency
+
+        //title border
+        TitledBorder listBorder = BorderFactory.createTitledBorder("Notifications");
+        listBorder.setTitleColor(Color.WHITE);
+        listBorder.setTitleJustification(TitledBorder.CENTER);
+        outputPanel.setBorder(listBorder);
+
+        item.add(new AlphaContainer(outputPanel));
+    }
+    /**
+     * Creates the help panel, which allows 
+     * a user to select the help button.
+     * 
+     * @param item
+     */
     private void helPanel(JLabel item) {
         helPanel = new JPanel();
         helPanel.setBounds(0,250,500,250);
         helPanel.setPreferredSize(new Dimension(300,400));
 
         helPanel.setBackground(panelColor);//A value determines transparency
+
+        //title border
+        TitledBorder listBorder = BorderFactory.createTitledBorder("Help and Information");
+        listBorder.setTitleColor(Color.WHITE);
+        listBorder.setTitleJustification(TitledBorder.CENTER);
+        helPanel.setBorder(listBorder);
+
         item.add(new AlphaContainer(helPanel));
     }
 
@@ -303,7 +334,7 @@ class Frame extends JFrame implements ActionListener {
     private void setRaceLabel(JPanel item) {
         race = new JLabel();
         race.setText("Race: "+ randomCharacter.getRaceType());
-        race.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+        race.setFont(new Font("New Peninim MT",Font.PLAIN,14));
         item.add(race);
     }
 
@@ -316,7 +347,7 @@ class Frame extends JFrame implements ActionListener {
         desc = new JLabel();
         String temp = "<html>" + randomCharacter.getDescType() + "</html>";
         desc.setText(temp);
-        desc.setFont(new Font("New Peninim MT",Font.ITALIC,15));
+        desc.setFont(new Font("New Peninim MT",Font.ITALIC,14));
         item.add(desc);
     }
 
@@ -329,7 +360,7 @@ class Frame extends JFrame implements ActionListener {
         classType = new JLabel();
         classType.setVerticalAlignment(JLabel.CENTER);
         classType.setText("Class: " + randomCharacter.getClassType() );
-        classType.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+        classType.setFont(new Font("New Peninim MT",Font.PLAIN,14));
         item.add(classType);
     }
 
@@ -357,27 +388,27 @@ class Frame extends JFrame implements ActionListener {
 
         strStatDisp = new JLabel();
         strStatDisp.setText("Strength: " + stats[2]);
-        strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+        strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         dexStatDisp = new JLabel();
         dexStatDisp.setText("Dexterity: " + stats[1]);
-        dexStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+        dexStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         conStatDisp = new JLabel();
         conStatDisp.setText("Constitution: " + stats[3]);
-        conStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+        conStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         intStatDisp = new JLabel();
         intStatDisp.setText("Intelligence: " + stats[0]);//setting character stat to display generated stats
-        intStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+        intStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         wisStatDisp = new JLabel();
         wisStatDisp.setText("Wisdom: " + stats[5]);
-        wisStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+        wisStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
         chrStatDisp = new JLabel();
         chrStatDisp.setText("Charisma: " + stats[4]);
-        chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,18));
+        chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
 
     
         //adding all items
@@ -442,6 +473,28 @@ class Frame extends JFrame implements ActionListener {
         String temp = "<html>" + randomCharacter.getDescType() + "</html>";
         desc.setText(temp);
     }
+     /**
+     * --------WIP-------
+     * This function should update the display list
+     * with items that are still inside the character list.
+     */
+    private void updateDisplayList(){
+        //add character sheet to panel
+        setCharacterSheet(disPanel);
+
+        //list model initialization 
+        
+        ArrayList<PlayerCharacter> tempDisList = characterList.getCharacterList();
+
+        //add to model list
+        for(int i = 0; i < tempDisList.size(); i++) {
+            pcModel.addElement(tempDisList.get(i).getDisplayString());
+        }
+
+
+        //initialization of scroll list
+        disPanel.add(pcPane);
+    }
    
     /**
      * Perfoms actions based on which button 
@@ -477,6 +530,8 @@ class Frame extends JFrame implements ActionListener {
                     pcModel.remove(pos[i]);
                 }
             }
+            // updateDisplayList();
+            
         }
 
         //exports the character sheet to an output text file

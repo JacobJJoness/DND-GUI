@@ -73,7 +73,7 @@ public class FileHandler {
         String path = "Downloads";
         try {
             String home = System.getProperty("user.home");
-            File f = new File(new File(home, "Downloads"), "ouput.txt");
+            File f = new File(new File(home, "Downloads"), "output.txt");
             path = f.getPath();
             FileWriter writer = new FileWriter(path);
             for(int i = 0; i < items.length; i++) {
