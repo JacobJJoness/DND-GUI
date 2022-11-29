@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch GUI",
+            "request": "launch",
+            "mainClass": "gui.GUI",
+            "projectName": "DND-GUI_62b30971"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

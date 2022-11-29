@@ -188,10 +188,24 @@ public class CharacterSheet {
      * position in the character list.
      * 
      * @param pos
+     * 
      * @return PlayerCharacter object at pos
      */
     public PlayerCharacter getPlayerCharacter(int pos) {
         return characterList.get(pos);
+    }
+
+    /**
+     * Returns whether or not a specific PlayerCharacter 
+     * object is in the list or not.
+     * 
+     * @param pc
+     * 
+     * @return true if in list
+     * @return false if not in list
+     */
+    public boolean containsPlayerCharacter(PlayerCharacter pc) {
+        return characterList.contains(pc);
     }
 
 

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
@@ -71,7 +72,7 @@ class Frame extends JFrame implements ActionListener {
     JButton save;
     JButton export;
     JButton remove; //
-    //JButton select; //
+    JButton clear; //
     JButton help; //
     
 
@@ -151,8 +152,11 @@ class Frame extends JFrame implements ActionListener {
 
     private void outputPanel(JLabel item){
         outputPanel = new JPanel();
-        outputPanel.setBounds(250,250,200,100);
-        outputPanel.setPreferredSize(new Dimension(605,200));
+        //outputPanel.setBounds(0,0,500,200);
+        //outputPanel.setPreferredSize(new Dimension(605,350));
+        //size and bounds of display panel
+        outputPanel.setBounds(0, 0, 500, 300);
+        outputPanel.setPreferredSize(new Dimension(600, 350));
 
         outputPanel.setBackground(panelColor);//A value determines transparency
 
@@ -169,14 +173,12 @@ class Frame extends JFrame implements ActionListener {
         conModel = new DefaultListModel();
         ArrayList<String> tempConList = new ArrayList<String>();
 
-        //add to model list
-        for(int i = 0; i < tempConList.size(); i++) {
-            conModel.addElement(tempConList.get(i));
-        }
+        //add greeting to console list
+        conModel.addElement("Welcome to the \"Dungeons & Dragons\" Random Character Generator!");
 
         //initialization of list
         conList = new JList(conModel);
-        conList.setVisibleRowCount(5);
+        conList.setVisibleRowCount(8);
         conList.setFixedCellHeight(30);
         conList.setFixedCellWidth(500);
         conList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -184,6 +186,13 @@ class Frame extends JFrame implements ActionListener {
         //initialization of scroll list
         conPane = new JScrollPane(conList);
         outputPanel.add(conPane);
+
+        //button for removing character
+        clear = new JButton();
+        clear.setText("Clear");
+        clear.addActionListener(this);
+        clear.setFocusable(false);
+        outputPanel.add(clear);
         
 
         item.add(new AlphaContainer(outputPanel));
@@ -534,17 +543,21 @@ class Frame extends JFrame implements ActionListener {
             updateClassLabel();
             updateRaceLabel();
             updateDescriptionLabel();
+            conModel.addElement("Success! A new character was created.");
+            conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
         }
 
         //saves a character to the character sheet
         if(e.getSource() == save) {
             if(characterList.addPlayerCharacter(randomCharacter)) {
                 pcModel.addElement(randomCharacter.getDisplayString());
-            } else if (characterList.getSize() == 19) {
-                conModel.addElement("Error! Max characters in list reached.");
+                conModel.addElement("Success! Character added to your list.");
+            } else if(characterList.containsPlayerCharacter(randomCharacter)) {
+                conModel.addElement("Error! Character is already in your list.");
             } else {
-                conModel.addElement("Error! Player Character was not able to be added to the list.");
+                conModel.addElement("Error! Your list contains the max number of characters. Please remove one.");
             }
+            conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
         }
 
         //saves a character to the character sheet
@@ -554,16 +567,31 @@ class Frame extends JFrame implements ActionListener {
             for(int i = (pos.length-1); i >=0; i--) {
                 if(characterList.removePlayerCharacter(characterList.getPlayerCharacter(pos[i]))) {
                     pcModel.remove(pos[i]);
+                    conModel.addElement("Success! Character(s) removed from your list.");
+                } else {
+                    conModel.addElement("Error! Cannot remove characters from an empty list.");
                 }
             }
-            // updateDisplayList();
-            
+            conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
         }
 
         //exports the character sheet to an output text file
         if(e.getSource() == export) {
             FileHandler outputter = new FileHandler();
-            outputter.writeFile(characterList.getDisplayList());
+            if(outputter.writeFile(characterList.getDisplayList())) {
+                conModel.addElement("Success! The list of characters was added to your 'Downloads' folder.");
+            } else {
+                conModel.addElement("Error! The list of characters was not added to your 'Downloads' folder.");
+            }
+            conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
+        } 
+
+        if(e.getSource() == clear) {
+            conModel.clear();
         }
+
+        //conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
+        pcList.ensureIndexIsVisible(pcModel.indexOf(pcModel.lastElement()));
+        
     }
 }

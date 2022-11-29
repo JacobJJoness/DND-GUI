@@ -69,7 +69,7 @@ public class FileHandler {
      * 
      * @exception IOException unable to write items into target output text file
      */
-    public void writeFile(String[] items) {
+    public boolean writeFile(String[] items) {
         String path = "Downloads";
         try {
             String home = System.getProperty("user.home");
@@ -80,8 +80,10 @@ public class FileHandler {
                 writer.write(items[i] + "\n");
             }
             writer.close();
+            return true;
         } catch(IOException e) {
             System.out.println("Error! " + path + " was not found");
         }
+        return false;
     }
 }
