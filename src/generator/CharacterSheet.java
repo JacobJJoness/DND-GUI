@@ -193,4 +193,14 @@ public class CharacterSheet {
     public PlayerCharacter getPlayerCharacter(int pos) {
         return characterList.get(pos);
     }
+
+
+    /**
+     * Returns the current size of the list.
+     * 
+     * @return size of characterList
+     */
+    public int getSize() {
+        return characterList.size();
+    }
 }

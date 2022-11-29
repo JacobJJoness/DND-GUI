@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
@@ -17,7 +18,7 @@ import javax.swing.border.TitledBorder;
 //import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Component;
+//import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -100,11 +101,11 @@ class Frame extends JFrame implements ActionListener {
     DefaultListModel pcModel; 
     JLabel pcSheet;
 
-    //initializing generator display
-    JList genList;
-    JScrollPane genPane;
-    DefaultListModel genModel;
-    JLabel genSheet;
+    //initializing console display
+    JList conList;
+    JScrollPane conPane;
+    DefaultListModel conModel;
+    JLabel conSheet;
 
     /**
      * Default Constructor for Frame object.
@@ -139,8 +140,6 @@ class Frame extends JFrame implements ActionListener {
 
         //content panels
         generatorPanel(background);
-        //characterImagePanel(background);
-        //informationPanel(background);
         displayPanel(background);
         helPanel(background);
         outputPanel(background);
@@ -151,8 +150,8 @@ class Frame extends JFrame implements ActionListener {
 
     private void outputPanel(JLabel item){
         outputPanel = new JPanel();
-        outputPanel.setBounds(250,250,500,250);
-        outputPanel.setPreferredSize(new Dimension(300,400));
+        outputPanel.setBounds(250,250,200,100);
+        outputPanel.setPreferredSize(new Dimension(605,200));
 
         outputPanel.setBackground(panelColor);//A value determines transparency
 
@@ -161,6 +160,30 @@ class Frame extends JFrame implements ActionListener {
         listBorder.setTitleColor(Color.WHITE);
         listBorder.setTitleJustification(TitledBorder.CENTER);
         outputPanel.setBorder(listBorder);
+
+        //add character sheet to panel
+        setConsoleSheet(outputPanel);
+
+        //list model initialization 
+        conModel = new DefaultListModel();
+        ArrayList<String> tempConList = new ArrayList<String>();
+
+        //add to model list
+        for(int i = 0; i < tempConList.size(); i++) {
+            conModel.addElement(tempConList.get(i));
+        }
+
+        //initialization of list
+        conList = new JList(conModel);
+        conList.setVisibleRowCount(5);
+        conList.setFixedCellHeight(30);
+        conList.setFixedCellWidth(500);
+        conList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        //initialization of scroll list
+        conPane = new JScrollPane(conList);
+        outputPanel.add(conPane);
+        
 
         item.add(new AlphaContainer(outputPanel));
     }
@@ -439,6 +462,15 @@ class Frame extends JFrame implements ActionListener {
          item.add(pcSheet);
     }
 
+    private void setConsoleSheet(JPanel item) {
+        conSheet = new JLabel();
+
+        conSheet.setHorizontalAlignment(SwingConstants.LEFT);
+        conSheet.setFont(new Font("New Peninim MT",Font.ITALIC,20));
+
+        item.add(conSheet);
+   }
+
     /**
      * Updates the stats label.
      */
@@ -483,28 +515,7 @@ class Frame extends JFrame implements ActionListener {
         String temp = "<html>" + randomCharacter.getDescType() + "</html>";
         desc.setText(temp);
     }
-     /**
-     * --------WIP-------
-     * This function should update the display list
-     * with items that are still inside the character list.
-     */
-    private void updateDisplayList(){
-        //add character sheet to panel
-        setCharacterSheet(disPanel);
 
-        //list model initialization 
-        
-        ArrayList<PlayerCharacter> tempDisList = characterList.getCharacterList();
-
-        //add to model list
-        for(int i = 0; i < tempDisList.size(); i++) {
-            pcModel.addElement(tempDisList.get(i).getDisplayString());
-        }
-
-
-        //initialization of scroll list
-        disPanel.add(pcPane);
-    }
    
     /**
      * Perfoms actions based on which button 
@@ -528,6 +539,10 @@ class Frame extends JFrame implements ActionListener {
         if(e.getSource() == save) {
             if(characterList.addPlayerCharacter(randomCharacter)) {
                 pcModel.addElement(randomCharacter.getDisplayString());
+            } else if (characterList.getSize() == 19) {
+                conModel.addElement("Error! Max characters in list reached.");
+            } else {
+                conModel.addElement("Error! Player Character was not able to be added to the list.");
             }
         }
 
