@@ -27,10 +27,13 @@ public class MusicAdder {
         AudioInputStream GOTStream = AudioSystem.getAudioInputStream(GOTFile);
         Clip GOTClip = AudioSystem.getClip();
 
-        File beat = new File("music/beat.wav");
-        AudioInputStream beatStream = AudioSystem.getAudioInputStream(beat);
-        Clip beatClip = AudioSystem.getClip();
+        File BBFile = new File("music/BB.wav");
+        AudioInputStream bbStream = AudioSystem.getAudioInputStream(BBFile);
+        Clip bbClip = AudioSystem.getClip();
 
+        File WTCHRFile = new File("music/WTCHR.wav");
+        AudioInputStream wtchrStream = AudioSystem.getAudioInputStream(WTCHRFile);
+        Clip wtchrClip = AudioSystem.getClip();
 
         GOTClip.open(GOTStream);
         GOTClip.start();
