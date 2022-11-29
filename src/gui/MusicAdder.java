@@ -10,16 +10,30 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.util.*;
 
+
+/**
+ *The MusicAdder class adds the background music to wherever it is 
+ * Instantiated. As long as the program continues to run it will
+ * play music
+ * @author Jacob Jones 
+ * @since November 28, 2022
+ */
 public class MusicAdder {
     
 
     MusicAdder() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
-        File file = new File("files/theme.wav");
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioStream);
-        clip.start();
+        File GOTFile = new File("music/GOT.wav");
+        AudioInputStream GOTStream = AudioSystem.getAudioInputStream(GOTFile);
+        Clip GOTClip = AudioSystem.getClip();
+
+        File beat = new File("music/beat.wav");
+        AudioInputStream beatStream = AudioSystem.getAudioInputStream(beat);
+        Clip beatClip = AudioSystem.getClip();
+
+
+        GOTClip.open(GOTStream);
+        GOTClip.start();
 
        
         
