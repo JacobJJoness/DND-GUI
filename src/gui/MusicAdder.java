@@ -23,23 +23,18 @@ public class MusicAdder {
 
     MusicAdder() throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
-        File GOTFile = new File("music/GOT.wav");
-        AudioInputStream GOTStream = AudioSystem.getAudioInputStream(GOTFile);
-        Clip GOTClip = AudioSystem.getClip();
 
-        File BBFile = new File("music/BB.wav");
-        AudioInputStream bbStream = AudioSystem.getAudioInputStream(BBFile);
-        Clip bbClip = AudioSystem.getClip();
 
-        File WTCHRFile = new File("music/WTCHR.wav");
-        AudioInputStream wtchrStream = AudioSystem.getAudioInputStream(WTCHRFile);
-        Clip wtchrClip = AudioSystem.getClip();
-
-        GOTClip.open(GOTStream);
-        GOTClip.start();
-
-       
+        File soundFile = new File("music/soundtrack.wav");
+        AudioInputStream soundStream = AudioSystem.getAudioInputStream(soundFile);
+        Clip fullClip = AudioSystem.getClip();
+  
+        fullClip.open(soundStream);
+        fullClip.start();
+        fullClip.loop(Clip.LOOP_CONTINUOUSLY);
         
+        
+    
        
     }
 }

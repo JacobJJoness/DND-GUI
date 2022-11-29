@@ -122,11 +122,12 @@ class Frame extends JFrame implements ActionListener {
         setLayout(null); //sets layout to null
         setSize(screenWidth, screenHeight); //sets x and y dimension
         setVisible(true); //makes the frame visible
-
+        getContentPane().setBackground(new Color(20,20,20));
+        
         setLayout(new FlowLayout()); //sets layout to new default FlowLayout
 
         //code for setting our own Icon Style
-        ImageIcon logoImage = new ImageIcon("images/logo.png");
+        ImageIcon logoImage = new ImageIcon("images/updatedLogo.png");
         setIconImage(logoImage.getImage());
 
         // background picture
