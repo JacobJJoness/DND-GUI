@@ -114,8 +114,8 @@ class Frame extends JFrame implements ActionListener {
     Frame() {
         //adjusts frame to screensize
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenHeight = screenSize.height;
-        int screenWidth = 19 * screenSize.width / 20;
+        int screenHeight = 7 * screenSize.height / 12;
+        int screenWidth = 3 * screenSize.width / 4;
         
         setTitle("\"Dungeons & Dragons\" Random Character Generator"); //sets application title
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //controls how exit works, also HIDE_ON_CLOSE and NOTHING_ON_CLOSE
@@ -150,15 +150,10 @@ class Frame extends JFrame implements ActionListener {
     }
 
 
-    private void outputPanel(JLabel item){
+    private void outputPanel(JLabel item) {
         outputPanel = new JPanel();
-        //outputPanel.setBounds(0,0,500,200);
-        //outputPanel.setPreferredSize(new Dimension(605,350));
-        //size and bounds of display panel
-        outputPanel.setBounds(0, 0, 500, 300);
-        outputPanel.setPreferredSize(new Dimension(600, 350));
-
-        outputPanel.setBackground(panelColor);//A value determines transparency
+        outputPanel.setBounds(0, 0, 500, 50);
+        outputPanel.setPreferredSize(new Dimension(600, 100));
 
         //title border
         TitledBorder listBorder = BorderFactory.createTitledBorder("Notifications");
@@ -166,7 +161,7 @@ class Frame extends JFrame implements ActionListener {
         listBorder.setTitleJustification(TitledBorder.CENTER);
         outputPanel.setBorder(listBorder);
 
-        //add character sheet to panel
+        //add console sheet to panel
         setConsoleSheet(outputPanel);
 
         //list model initialization 
@@ -178,7 +173,7 @@ class Frame extends JFrame implements ActionListener {
 
         //initialization of list
         conList = new JList(conModel);
-        conList.setVisibleRowCount(8);
+        conList.setVisibleRowCount(1);
         conList.setFixedCellHeight(30);
         conList.setFixedCellWidth(500);
         conList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -189,12 +184,12 @@ class Frame extends JFrame implements ActionListener {
 
         //button for removing character
         clear = new JButton();
-        clear.setText("Clear");
+        clear.setText("Clear User Log");
         clear.addActionListener(this);
         clear.setFocusable(false);
         outputPanel.add(clear);
         
-
+        outputPanel.setBackground(panelColor);//A value determines transparency
         item.add(new AlphaContainer(outputPanel));
     }
     /**
@@ -205,8 +200,8 @@ class Frame extends JFrame implements ActionListener {
      */
     private void helPanel(JLabel item) {
         helPanel = new JPanel();
-        helPanel.setBounds(0,250,500,250);
-        helPanel.setPreferredSize(new Dimension(300,400));
+        helPanel.setBounds(0,250,290,50);
+        helPanel.setPreferredSize(new Dimension(300,100));
 
         helPanel.setBackground(panelColor);//A value determines transparency
 
@@ -226,7 +221,7 @@ class Frame extends JFrame implements ActionListener {
 
         //size and bounds of display panel
         disPanel.setBounds(0, 0, 500, 300);
-        disPanel.setPreferredSize(new Dimension(605, 400));
+        disPanel.setPreferredSize(new Dimension(600, 400));
 
         //title border
         TitledBorder listBorder = BorderFactory.createTitledBorder("List of Saved Characters");
@@ -259,14 +254,14 @@ class Frame extends JFrame implements ActionListener {
 
         //button for removing character
         remove = new JButton();
-        remove.setText("Remove");
+        remove.setText("Remove Character from List");
         remove.addActionListener(this);
         remove.setFocusable(false);
         disPanel.add(remove);
 
         //button for exporting character sheet
         export = new JButton();
-        export.setText("Export");//text inside button
+        export.setText("Export List to Downloads");//text inside button
         export.addActionListener(this);//adding button action
         export.setFocusable(false);//removing a default box around text
         disPanel.add(export);//adding button to panel
@@ -287,7 +282,7 @@ class Frame extends JFrame implements ActionListener {
         genPanel = new JPanel();
         
         //size and bounds of generator panel
-        genPanel.setBounds(0,0,290,300);
+        genPanel.setBounds(0,0,290,350);
         genPanel.setPreferredSize(new Dimension(300,400));
 
         TitledBorder generatorBorder = BorderFactory.createTitledBorder("Character Generator");
@@ -300,14 +295,14 @@ class Frame extends JFrame implements ActionListener {
 
         //Button for character generation
         generator = new JButton();
-        generator.setText("Generate");//text inside button
+        generator.setText("Generate a New Character");//text inside button
         generator.addActionListener(this);//adding button action
         generator.setFocusable(false);//removing a default box around text
         genPanel.add(generator);//adding button to panel
 
         //button for saving character
         save = new JButton(); 
-        save.setText("Save");
+        save.setText("Save Character to List");
         save.addActionListener(this);
         save.setFocusable(false);
         genPanel.add(save);
@@ -475,7 +470,7 @@ class Frame extends JFrame implements ActionListener {
     private void setConsoleSheet(JPanel item) {
         conSheet = new JLabel();
 
-        conSheet.setHorizontalAlignment(SwingConstants.LEFT);
+        conSheet.setHorizontalAlignment(SwingConstants.CENTER);
         conSheet.setFont(new Font("New Peninim MT",Font.ITALIC,20));
 
         item.add(conSheet);
@@ -535,6 +530,8 @@ class Frame extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        conModel.clear();
+
         //generates a new character
         if(e.getSource() == generator) {
             randomCharacter = new PlayerCharacter();
@@ -544,7 +541,6 @@ class Frame extends JFrame implements ActionListener {
             updateRaceLabel();
             updateDescriptionLabel();
             conModel.addElement("Success! A new character was created.");
-            conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
         }
 
         //saves a character to the character sheet
@@ -557,7 +553,6 @@ class Frame extends JFrame implements ActionListener {
             } else {
                 conModel.addElement("Error! Your list contains the max number of characters. Please remove one.");
             }
-            conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
         }
 
         //saves a character to the character sheet
@@ -572,7 +567,6 @@ class Frame extends JFrame implements ActionListener {
                     conModel.addElement("Error! Cannot remove characters from an empty list.");
                 }
             }
-            conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
         }
 
         //exports the character sheet to an output text file
@@ -583,15 +577,21 @@ class Frame extends JFrame implements ActionListener {
             } else {
                 conModel.addElement("Error! The list of characters was not added to your 'Downloads' folder.");
             }
-            conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
         } 
 
         if(e.getSource() == clear) {
             conModel.clear();
         }
 
-        //conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
-        pcList.ensureIndexIsVisible(pcModel.indexOf(pcModel.lastElement()));
+        //ensures the console scrollable list stays at the bottom
+        if(conModel.size() > 0) {
+           conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
+        }
+
+        //ensures the character sheet scrollable list stays at the bottom
+        if(pcModel.size() > 0) {
+            pcList.ensureIndexIsVisible(pcModel.indexOf(pcModel.lastElement()));
+        }
         
     }
 }
