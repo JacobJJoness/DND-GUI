@@ -74,6 +74,7 @@ class Frame extends JFrame implements ActionListener {
     JButton remove; //
     JButton clear; //
     JButton help; //
+    JButton about;
     
 
     //initializing panels
@@ -182,7 +183,7 @@ class Frame extends JFrame implements ActionListener {
         conPane = new JScrollPane(conList);
         outputPanel.add(conPane);
 
-        //button for removing character
+        //button for clearing console list
         clear = new JButton();
         clear.setText("Clear User Log");
         clear.addActionListener(this);
@@ -203,7 +204,7 @@ class Frame extends JFrame implements ActionListener {
         helPanel.setBounds(0,250,290,50);
         helPanel.setPreferredSize(new Dimension(300,100));
 
-        helPanel.setBackground(panelColor);//A value determines transparency
+        
 
         //title border
         TitledBorder listBorder = BorderFactory.createTitledBorder("Help and Information");
@@ -211,6 +212,21 @@ class Frame extends JFrame implements ActionListener {
         listBorder.setTitleJustification(TitledBorder.CENTER);
         helPanel.setBorder(listBorder);
 
+        //button for about information
+        about = new JButton();
+        about.setText("About");
+        about.addActionListener(this);
+        about.setFocusable(false);
+        helPanel.add(about);
+
+        //button for help information
+        help = new JButton();
+        help.setText("Help");
+        help.addActionListener(this);
+        help.setFocusable(false);
+        helPanel.add(help);
+
+        helPanel.setBackground(panelColor); //A value determines transparency
         item.add(new AlphaContainer(helPanel));
     }
 
