@@ -44,6 +44,7 @@ import java.awt.Image;
  * @since November 14, 2022
  */
 public class GUI {
+    
     public static void main(String[] args) {
         Frame frame = new Frame();
         try{
@@ -541,7 +542,7 @@ class Frame extends JFrame implements ActionListener {
     }
 
     private void helpPopUpDialogBox() {
-        Frame tempF = new Frame();
+        Frame tempF = this;
         String message = "";
         message += "There are four main sections to the application.\n";
         message += "1. Random Character Generator\n";
@@ -555,14 +556,14 @@ class Frame extends JFrame implements ActionListener {
         message += "When the \"Save to List\" button is clicked, the current character shown in the generator will be added to the character list, which is found in the Character Sheet panel.\n";
         message += "\n";
         message += "The Character Sheet panel is found in the top right corner.\n";
-        message += "This section contains two button options: \"Remove Character from List\" and \"Export Character\" to 'Downloads'.\n";
-        message += "To remove a character from the character list, you must select one or more of the options displayed \n";
+        message += "This section contains two button options: \"Remove Character(s) from List\" and \"Export Character to 'Downloads'\".\n";
+        message += "To remove a character from the character list, you must select one or more of the options displayed and then click the \"Remove Character(s) from List\".\n";
         message += "\n";
         JOptionPane.showMessageDialog(tempF,message, "How to Use Guide", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void aboutPopUpDialogBox() {
-        Frame tempF = new Frame();
+        Frame tempF = this;
         String message = "The About Pop up works!";
         JOptionPane.showMessageDialog(tempF,message, "About", JOptionPane.INFORMATION_MESSAGE);
     }
