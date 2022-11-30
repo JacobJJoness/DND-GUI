@@ -445,27 +445,27 @@ class Frame extends JFrame implements ActionListener {
 
         strStatDisp = new JLabel();
         strStatDisp.setText("Strength: " + stats[0]);
-        strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
+        strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
 
         dexStatDisp = new JLabel();
         dexStatDisp.setText("Dexterity: " + stats[1]);
-        dexStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
+        dexStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
 
         conStatDisp = new JLabel();
         conStatDisp.setText("Constitution: " + stats[2]);
-        conStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
+        conStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
 
         intStatDisp = new JLabel();
         intStatDisp.setText("Intelligence: " + stats[3]);//setting character stat to display generated stats
-        intStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
+        intStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
 
         wisStatDisp = new JLabel();
         wisStatDisp.setText("Wisdom: " + stats[4]);
-        wisStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
+        wisStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
 
         chrStatDisp = new JLabel();
         chrStatDisp.setText("Charisma: " + stats[5]);
-        chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,12));
+        chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
 
     
         //adding all items
@@ -571,9 +571,18 @@ class Frame extends JFrame implements ActionListener {
     }
 
     private void aboutPopUpDialogBox() {
+        ImageIcon icon = new ImageIcon("images/updatedLogoSmall.png");
         Frame tempF = this;
-        String message = "The About Pop up works!";
-        JOptionPane.showMessageDialog(tempF,message, "About", JOptionPane.INFORMATION_MESSAGE);
+        String message = "";
+        message += "Version 1.2.1\n";
+        message += "Last Software Update: December 1, 2022\n";
+        message += "\n";
+        message += "\"Dungeons & Dragons\" Random Character Generator is designed by \nThe Comedians, a small Java application development company.\n";
+        message += "\n";
+        message += "© 2022 The Comedians. All rights reserved.";
+        
+        JOptionPane.showMessageDialog(tempF,message, "About \"Dungeons & Dragons\" Random Character Generator", JOptionPane.INFORMATION_MESSAGE, icon);
+        
     }
 
    
@@ -592,10 +601,13 @@ class Frame extends JFrame implements ActionListener {
         } else if(e.getSource() == help) {
             helpPopUpDialogBox();
         } else {
-            conModel.clear();
+            if(e.getSource() == clear) {
+                conModel.clear();
+            }
 
             //generates a new character
             if(e.getSource() == generator) {
+                conModel.clear();
                 randomCharacter = new PlayerCharacter();
                 updateStatLabels();
                 updateNameLabel();
@@ -605,8 +617,9 @@ class Frame extends JFrame implements ActionListener {
                 conModel.addElement("Success! A new character was created.");
             }
 
-            //saves a character to the character sheet
+            //saves a character to the character list
             if(e.getSource() == save) {
+                conModel.clear();
                 if(characterList.addPlayerCharacter(randomCharacter)) {
                     pcModel.addElement(randomCharacter.getDisplayString());
                     conModel.addElement("Success! Character added to your list.");
@@ -617,8 +630,9 @@ class Frame extends JFrame implements ActionListener {
                 }
             }
 
-            //saves a character to the character sheet
+            //removes a character from the character list
             if(e.getSource() == remove) {
+                conModel.clear();
                 if(pcModel.size() > 0) {
                     int[] pos = pcList.getSelectedIndices();
 
@@ -639,10 +653,9 @@ class Frame extends JFrame implements ActionListener {
                 }
             }
             
-
-
             //exports the character sheet to an output text file
             if(e.getSource() == export) {
+                conModel.clear();
                 if(pcModel.size() > 0) {
                     FileHandler outputter = new FileHandler();
                     if(outputter.writeFile(characterList.getDisplayList())) {
@@ -653,12 +666,7 @@ class Frame extends JFrame implements ActionListener {
                 } else {
                     conModel.addElement("Error! Cannot export an empty list of characters.");
                 }
-            
             } 
-        
-            if(e.getSource() == clear) {
-                conModel.clear();
-            }
         
             //ensures the character sheet scrollable list stays at the bottom
             if(pcModel.size() > 0) {
