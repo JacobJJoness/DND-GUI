@@ -221,7 +221,7 @@ class Frame extends JFrame implements ActionListener {
 
         //button for help information
         help = new JButton();
-        help.setText("Help");
+        help.setText("How to Use");
         help.addActionListener(this);
         help.setFocusable(false);
         helPanel.add(help);
@@ -311,14 +311,14 @@ class Frame extends JFrame implements ActionListener {
 
         //Button for character generation
         generator = new JButton();
-        generator.setText("Generate a New Character");//text inside button
+        generator.setText("Generate New");//text inside button
         generator.addActionListener(this);//adding button action
         generator.setFocusable(false);//removing a default box around text
         genPanel.add(generator);//adding button to panel
 
         //button for saving character
         save = new JButton(); 
-        save.setText("Save Character to List");
+        save.setText("Save to List");
         save.addActionListener(this);
         save.setFocusable(false);
         genPanel.add(save);
@@ -360,6 +360,7 @@ class Frame extends JFrame implements ActionListener {
      * 
      * @param item
      */
+    
     private void informationPanel(JPanel item) {
         //panel setup
         infoPanel = new JPanel();
@@ -537,6 +538,14 @@ class Frame extends JFrame implements ActionListener {
         desc.setText(temp);
     }
 
+    private void helpPopUpDialogBox() {
+
+    }
+
+    private void aboutPopUpDialogBox() {
+
+    }
+
    
     /**
      * Perfoms actions based on which button 
@@ -597,6 +606,14 @@ class Frame extends JFrame implements ActionListener {
 
         if(e.getSource() == clear) {
             conModel.clear();
+        }
+
+        if(e.getSource() == about) {
+            aboutPopUpDialogBox();
+        }
+
+        if(e.getSource() == help) {
+            helpPopUpDialogBox();
         }
 
         //ensures the console scrollable list stays at the bottom
