@@ -28,6 +28,7 @@ import javax.swing.BorderFactory;
 //import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
@@ -154,7 +155,7 @@ class Frame extends JFrame implements ActionListener {
     private void outputPanel(JLabel item) {
         outputPanel = new JPanel();
         outputPanel.setBounds(0, 0, 500, 50);
-        outputPanel.setPreferredSize(new Dimension(600, 100));
+        outputPanel.setPreferredSize(new Dimension(600, 90));
 
         //title border
         TitledBorder listBorder = BorderFactory.createTitledBorder("Notifications");
@@ -175,8 +176,8 @@ class Frame extends JFrame implements ActionListener {
         //initialization of list
         conList = new JList(conModel);
         conList.setVisibleRowCount(1);
-        conList.setFixedCellHeight(30);
-        conList.setFixedCellWidth(500);
+        conList.setFixedCellHeight(20);
+        conList.setFixedCellWidth(420);
         conList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         //initialization of scroll list
@@ -185,7 +186,7 @@ class Frame extends JFrame implements ActionListener {
 
         //button for clearing console list
         clear = new JButton();
-        clear.setText("Clear User Log");
+        clear.setText("Clear");
         clear.addActionListener(this);
         clear.setFocusable(false);
         outputPanel.add(clear);
@@ -202,8 +203,8 @@ class Frame extends JFrame implements ActionListener {
     private void helPanel(JLabel item) {
         helPanel = new JPanel();
         helPanel.setBounds(0,250,290,50);
-        helPanel.setPreferredSize(new Dimension(300,100));
-
+        helPanel.setPreferredSize(new Dimension(300,90));
+        //helPanel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
         
 
         //title border
