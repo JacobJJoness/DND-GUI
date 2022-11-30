@@ -572,16 +572,21 @@ class Frame extends JFrame implements ActionListener {
 
     private void aboutPopUpDialogBox() {
         ImageIcon icon = new ImageIcon("images/updatedLogoSmall.png");
-        Frame tempF = this;
-        String message = "";
-        message += "Version 1.2.1\n";
-        message += "Last Software Update: December 1, 2022\n";
-        message += "\n";
-        message += "\"Dungeons & Dragons\" Random Character Generator is designed by \nThe Comedians, a small Java application development company.\n";
-        message += "\n";
-        message += "© 2022 The Comedians. All rights reserved.";
+        JPanel temPanel = new JPanel();
+        String message = "<html><head><style>h3{text-align: center;}h4{text-align: center;}p{text-align: center;}</style></head><body>";
+        message += "<p><b>\"Dungeons & Dragons\" Random Character Generator</b>";
+        message += " is designed by <br>The Comedians, a small Java application development company.<br><br>";
+        message += "Version 1.2.1<br>";
+        message += "Last Software Update: December 1, 2022<br><br>";
+        message += "<b>Copyright © 2022 The Comedians. All rights reserved.</b>";
+        message += "</p></body></html>";
+
+        JLabel tempLabel = new JLabel(message);
+        tempLabel.setAlignmentX(JLabel.CENTER);
+        temPanel.add(tempLabel);
         
-        JOptionPane.showMessageDialog(tempF,message, "About \"Dungeons & Dragons\" Random Character Generator", JOptionPane.INFORMATION_MESSAGE, icon);
+        
+        JOptionPane.showMessageDialog(this, tempLabel, "About", JOptionPane.INFORMATION_MESSAGE, icon);
         
     }
 
