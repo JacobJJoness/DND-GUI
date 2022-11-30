@@ -206,11 +206,10 @@ class Frame extends JFrame implements ActionListener {
         helPanel = new JPanel();
         helPanel.setBounds(0,250,290,50);
         helPanel.setPreferredSize(new Dimension(300,90));
-        //helPanel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
         
 
         //title border
-        TitledBorder listBorder = BorderFactory.createTitledBorder("Help and Information");
+        TitledBorder listBorder = BorderFactory.createTitledBorder("Generator Information");
         listBorder.setTitleColor(Color.WHITE);
         listBorder.setTitleJustification(TitledBorder.CENTER);
         helPanel.setBorder(listBorder);
@@ -273,14 +272,14 @@ class Frame extends JFrame implements ActionListener {
 
         //button for removing character
         remove = new JButton();
-        remove.setText("Remove Character from List");
+        remove.setText("Remove Character(s) from List");
         remove.addActionListener(this);
         remove.setFocusable(false);
         disPanel.add(remove);
 
         //button for exporting character sheet
         export = new JButton();
-        export.setText("Export List to Downloads");//text inside button
+        export.setText("Export List to 'Downloads'");//text inside button
         export.addActionListener(this);//adding button action
         export.setFocusable(false);//removing a default box around text
         disPanel.add(export);//adding button to panel
@@ -543,22 +542,31 @@ class Frame extends JFrame implements ActionListener {
 
     private void helpPopUpDialogBox() {
         Frame tempF = this;
-        String message = "";
-        message += "There are four main sections to the application.\n";
-        message += "1. Random Character Generator\n";
-        message += "2. Character Sheet\n";
-        message += "3. Help and Information\n";
-        message += "4. User Notifications\n";
+        String message = "Welcome to the \"Dungeons & Dragons\" Random Character Generator! Here are a few tips to get started:\n";
         message += "\n";
-        message += "The Random Character Generator panel is found in the top left corner.\n";
+        message += "The Character Generator panel is found in the top left corner.\n";
         message += "This section contains two button options: \"Generate New\" and \"Save to List\".\n";
-        message += "When the \"Generate New\" button is clicked, a new character will be generated in the panel with new stats and character information.\n";
-        message += "When the \"Save to List\" button is clicked, the current character shown in the generator will be added to the character list, which is found in the Character Sheet panel.\n";
+        message += "When the \"Generate New\" button is clicked, a new character will be generated\nin the panel with new stats and character information.\n";
+        message += "When the \"Save to List\" button is clicked, the current character shown in the\ngenerator will be added to the character list, which is found in the Character Sheet panel.\n";
         message += "\n";
-        message += "The Character Sheet panel is found in the top right corner.\n";
-        message += "This section contains two button options: \"Remove Character(s) from List\" and \"Export Character to 'Downloads'\".\n";
-        message += "To remove a character from the character list, you must select one or more of the options displayed and then click the \"Remove Character(s) from List\".\n";
+        message += "The List of Saved Characters panel is found in the top right corner.\n";
+        message += "This section contains two button options: \"Remove Character(s) from List\" \nand \"Export Character to 'Downloads'\".\n";
+        message += "To remove a character from the character list, you must select one or more \nof the character list options displayed, and then click the \"Remove Character(s) from List\".\n";
+        message += "To export the character list, you must have at least one character in the list, \nand then click on the \"Export List to 'Downloads'\".\n";
+        message += "The list will be added to your 'Downloads' folder as a text file.\n";
         message += "\n";
+        message += "The Generator Information panel is found in the bottom left corner.\n";
+        message += "This section contains two button options: \"About\" and \"How to Use\".\n";
+        message += "To learn more about information  and additional credits, click on \"About\" button.\n";
+        message += "Clicking on the \"How to Use\" button will allow you to return to this pop up at any time.\n";
+        message += "\n";
+        message += "The Notifications panel is found in the bottom right corner.\n";
+        message += "This section contains a console that displays system information and notifications when using the application.\n";
+        message += "This section also contains the button option \"Clear\" to clear the current information present in the console.\n";
+        message += "\n";
+        message += "To exit the application, click on the exit button located in the top taskbar of the application window.\n";
+        message += "\n";
+        message += "Thank you for using the \"Dungeons & Dragons\" Random Character Generator!";
         JOptionPane.showMessageDialog(tempF,message, "How to Use Guide", JOptionPane.INFORMATION_MESSAGE);
     }
 
