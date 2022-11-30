@@ -567,7 +567,7 @@ class Frame extends JFrame implements ActionListener {
         message += "To exit the application, click on the exit button located in the top taskbar of the application window.\n";
         message += "\n";
         message += "Thank you for using the \"Dungeons & Dragons\" Random Character Generator!";
-        JOptionPane.showMessageDialog(tempF,message, "How to Use Guide", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(tempF,message, "User Guide", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void aboutPopUpDialogBox() {
@@ -585,76 +585,85 @@ class Frame extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        conModel.clear();
-
-        //generates a new character
-        if(e.getSource() == generator) {
-            randomCharacter = new PlayerCharacter();
-            updateStatLabels();
-            updateNameLabel();
-            updateClassLabel();
-            updateRaceLabel();
-            updateDescriptionLabel();
-            conModel.addElement("Success! A new character was created.");
-        }
-
-        //saves a character to the character sheet
-        if(e.getSource() == save) {
-            if(characterList.addPlayerCharacter(randomCharacter)) {
-                pcModel.addElement(randomCharacter.getDisplayString());
-                conModel.addElement("Success! Character added to your list.");
-            } else if(characterList.containsPlayerCharacter(randomCharacter)) {
-                conModel.addElement("Error! Character is already in your list.");
-            } else {
-                conModel.addElement("Error! Your list contains the max number of characters. Please remove one.");
-            }
-        }
-
-        //saves a character to the character sheet
-        if(e.getSource() == remove) {
-            int[] pos = pcList.getSelectedIndices();
-            
-            for(int i = (pos.length-1); i >=0; i--) {
-                if(characterList.removePlayerCharacter(characterList.getPlayerCharacter(pos[i]))) {
-                    pcModel.remove(pos[i]);
-                    conModel.addElement("Success! Character(s) removed from your list.");
-                } else {
-                    conModel.addElement("Error! Cannot remove characters from an empty list.");
-                }
-            }
-        }
-
-        //exports the character sheet to an output text file
-        if(e.getSource() == export) {
-            FileHandler outputter = new FileHandler();
-            if(outputter.writeFile(characterList.getDisplayList())) {
-                conModel.addElement("Success! The list of characters was added to your 'Downloads' folder.");
-            } else {
-                conModel.addElement("Error! The list of characters was not added to your 'Downloads' folder.");
-            }
-        } 
-
-        if(e.getSource() == clear) {
-            conModel.clear();
-        }
+        //conModel.clear();
 
         if(e.getSource() == about) {
             aboutPopUpDialogBox();
-        }
-
-        if(e.getSource() == help) {
+        } else if(e.getSource() == help) {
             helpPopUpDialogBox();
-        }
+        } else {
+            conModel.clear();
 
-        //ensures the console scrollable list stays at the bottom
-        if(conModel.size() > 0) {
-           conList.ensureIndexIsVisible(conModel.indexOf(conModel.lastElement()));
-        }
+            //generates a new character
+            if(e.getSource() == generator) {
+                randomCharacter = new PlayerCharacter();
+                updateStatLabels();
+                updateNameLabel();
+                updateClassLabel();
+                updateRaceLabel();
+                updateDescriptionLabel();
+                conModel.addElement("Success! A new character was created.");
+            }
 
-        //ensures the character sheet scrollable list stays at the bottom
-        if(pcModel.size() > 0) {
-            pcList.ensureIndexIsVisible(pcModel.indexOf(pcModel.lastElement()));
-        }
+            //saves a character to the character sheet
+            if(e.getSource() == save) {
+                if(characterList.addPlayerCharacter(randomCharacter)) {
+                    pcModel.addElement(randomCharacter.getDisplayString());
+                    conModel.addElement("Success! Character added to your list.");
+                } else if(characterList.containsPlayerCharacter(randomCharacter)) {
+                conModel.addElement("Error! Character is already in your list.");
+                } else {
+                conModel.addElement("Error! Your list contains the max number of characters.");
+                }
+            }
+
+            //saves a character to the character sheet
+            if(e.getSource() == remove) {
+                if(pcModel.size() > 0) {
+                    int[] pos = pcList.getSelectedIndices();
+
+                    if(pos.length == 0) {
+                    conModel.addElement("Error! You did not select any character(s) for deletion.");
+                    } else {
+                        for(int i = (pos.length-1); i >=0; i--) {
+                            if(characterList.removePlayerCharacter(characterList.getPlayerCharacter(pos[i]))) {
+                                pcModel.remove(pos[i]);
+                                conModel.addElement("Success! Character(s) removed from your list.");
+                            } else {
+                                conModel.addElement("Error! Cannot remove character(s) from yourlist.");
+                            }
+                        }
+                    }
+                } else {
+                    conModel.addElement("Error! Cannot remove character(s) from an empty list.");
+                }
+            }
+            
+
+
+            //exports the character sheet to an output text file
+            if(e.getSource() == export) {
+                if(pcModel.size() > 0) {
+                    FileHandler outputter = new FileHandler();
+                    if(outputter.writeFile(characterList.getDisplayList())) {
+                        conModel.addElement("Success! The list of characters was added to your 'Downloads' folder.");
+                    } else {
+                        conModel.addElement("Error! The list of characters was not added to your 'Downloads' folder.");
+                    }
+                } else {
+                    conModel.addElement("Error! Cannot export an empty list of characters.");
+                }
+            
+            } 
         
+            if(e.getSource() == clear) {
+                conModel.clear();
+            }
+        
+            //ensures the character sheet scrollable list stays at the bottom
+            if(pcModel.size() > 0) {
+                pcList.ensureIndexIsVisible(pcModel.indexOf(pcModel.lastElement()));
+            }
+        }
     }
 }
