@@ -7,6 +7,7 @@ import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -540,11 +541,30 @@ class Frame extends JFrame implements ActionListener {
     }
 
     private void helpPopUpDialogBox() {
-
+        Frame tempF = new Frame();
+        String message = "";
+        message += "There are four main sections to the application.\n";
+        message += "1. Random Character Generator\n";
+        message += "2. Character Sheet\n";
+        message += "3. Help and Information\n";
+        message += "4. User Notifications\n";
+        message += "\n";
+        message += "The Random Character Generator panel is found in the top left corner.\n";
+        message += "This section contains two button options: \"Generate New\" and \"Save to List\".\n";
+        message += "When the \"Generate New\" button is clicked, a new character will be generated in the panel with new stats and character information.\n";
+        message += "When the \"Save to List\" button is clicked, the current character shown in the generator will be added to the character list, which is found in the Character Sheet panel.\n";
+        message += "\n";
+        message += "The Character Sheet panel is found in the top right corner.\n";
+        message += "This section contains two button options: \"Remove Character from List\" and \"Export Character\" to 'Downloads'.\n";
+        message += "To remove a character from the character list, you must select one or more of the options displayed \n";
+        message += "\n";
+        JOptionPane.showMessageDialog(tempF,message, "How to Use Guide", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void aboutPopUpDialogBox() {
-
+        Frame tempF = new Frame();
+        String message = "The About Pop up works!";
+        JOptionPane.showMessageDialog(tempF,message, "About", JOptionPane.INFORMATION_MESSAGE);
     }
 
    
