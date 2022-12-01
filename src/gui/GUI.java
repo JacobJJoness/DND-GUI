@@ -445,27 +445,27 @@ class Frame extends JFrame implements ActionListener {
 
         strStatDisp = new JLabel();
         strStatDisp.setText("Strength: " + stats[0]);
-        strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
+        strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,13));
 
         dexStatDisp = new JLabel();
         dexStatDisp.setText("Dexterity: " + stats[1]);
-        dexStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
+        dexStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,13));
 
         conStatDisp = new JLabel();
         conStatDisp.setText("Constitution: " + stats[2]);
-        conStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
+        conStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,13));
 
         intStatDisp = new JLabel();
         intStatDisp.setText("Intelligence: " + stats[3]);//setting character stat to display generated stats
-        intStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
+        intStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,13));
 
         wisStatDisp = new JLabel();
         wisStatDisp.setText("Wisdom: " + stats[4]);
-        wisStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
+        wisStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,13));
 
         chrStatDisp = new JLabel();
         chrStatDisp.setText("Charisma: " + stats[5]);
-        chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,15));
+        chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,13));
 
     
         //adding all items
