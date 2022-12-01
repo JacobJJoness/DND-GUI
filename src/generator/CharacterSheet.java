@@ -49,7 +49,6 @@ public class CharacterSheet {
         }
     }
 
-
     /**
      * Adds a new PlayerCharacter to the CharacterSheet through 
      * the characterList and displayList.
@@ -63,10 +62,7 @@ public class CharacterSheet {
                 updateDisplayList();
                 return true;
             }
-            System.out.println("Error! Max characters in list reached");
-            return false;
         } 
-        System.out.println("Error! Cannot add duplicate characters to the list");
         return false;
     }
 
@@ -82,9 +78,6 @@ public class CharacterSheet {
             updateDisplayList();
             return true;
         }
-        
-        System.out.println("Error! Cannot remove ungenerated characters from the list");
-        
         return false;
     }
 
@@ -207,7 +200,6 @@ public class CharacterSheet {
     public boolean containsPlayerCharacter(PlayerCharacter pc) {
         return characterList.contains(pc);
     }
-
 
     /**
      * Returns the current size of the list.
