@@ -545,7 +545,7 @@ class Frame extends JFrame implements ActionListener {
         JPanel temPanel = new JPanel();
         
         String message = "<html><body><p>";
-        message += "<b>Welcome to the \"Dungeons & Dragons\" Random Character Generator!</b> <br><br>Here are a few tips to get started:<br>";
+        message += "<b>Welcome to the \"Dungeons & Dragons\" Random Character Generator!</b> <br><br><br>Here are a few tips to get started:<br>";
         message += "<br>";
         message += "The <b>Character Generator</b> panel is found in the top left corner. ";
         message += "This section contains two button options: <br><b>\"Generate New\"</b> and <b>\"Save to List\"</b>. ";
