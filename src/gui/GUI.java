@@ -574,10 +574,16 @@ class Frame extends JFrame implements ActionListener {
         ImageIcon icon = new ImageIcon("images/updatedLogoSmall.png");
         JPanel temPanel = new JPanel();
         String message = "<html><head><style>h3{text-align: center;}h4{text-align: center;}p{text-align: center;}</style></head><body>";
-        message += "<p><b>\"Dungeons & Dragons\" Random Character Generator</b>";
-        message += " is designed by <br>The Comedians, a small Java application development company.<br><br>";
+        message += "<p>";
+        message += "<b>\"Dungeons & Dragons\" Random Character Generator</b><br>";
+        message += "<br>";
+        message += "Developed by: Ila Wallace & Jacob Jones<br>";
+        message += "Last Updated: December 1, 2022<br>";
         message += "Version 1.2.1<br>";
-        message += "Last Software Update: December 1, 2022<br><br>";
+        message += "<br>";
+        message += "<b>\"Dungeons & Dragons\" Random Character Generator</b>";
+        message += " is designed by <br>The Comedians, a small Java application development company.<br>";
+        message += "<br>";
         message += "<b>Copyright © 2022 The Comedians. All rights reserved.</b>";
         message += "</p></body></html>";
 
