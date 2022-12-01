@@ -56,7 +56,6 @@ public class FileHandler {
             System.out.println("Error! The input file is empty");
             items = null;
         }
-        
         return items;
     }
 
@@ -68,6 +67,9 @@ public class FileHandler {
      * @param items
      * 
      * @exception IOException unable to write items into target output text file
+     * 
+     * @return true if writes to file successfully
+     * @return false if failed
      */
     public boolean writeFile(String[] items) {
         String path = "Downloads";

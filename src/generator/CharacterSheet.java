@@ -54,6 +54,9 @@ public class CharacterSheet {
      * the characterList and displayList.
      * 
      * @param pc
+     * 
+     * @return true if successful
+     * @return false if failed
      */
     public boolean addPlayerCharacter(PlayerCharacter pc) {
         if(!characterList.contains(pc)) {
@@ -71,6 +74,9 @@ public class CharacterSheet {
      * the characterList and displayList.
      * 
      * @param pc
+     * 
+     * @return true if successful
+     * @return false if failed
      */
     public boolean removePlayerCharacter(PlayerCharacter pc) {
         if(characterList.contains(pc)) {
@@ -139,6 +145,7 @@ public class CharacterSheet {
      * 
      * @param list
      * @param fileSize
+     * 
      * @exception IllegalArgumentExcpetion character input is not 
      *            formatted correctly in list
      */
