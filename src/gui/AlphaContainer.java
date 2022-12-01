@@ -30,8 +30,7 @@ public class AlphaContainer extends JComponent
 	 * 
 	 * @param component
 	 */
-	public AlphaContainer(JComponent component)
-	{
+	public AlphaContainer(JComponent component) {
 		this.component = component;
 		setLayout(new BorderLayout());
 		setOpaque(false);
@@ -47,8 +46,7 @@ public class AlphaContainer extends JComponent
 	 * @param g 
 	 */
 	@Override
-	public void paintComponent(Graphics g)
-	{
+	public void paintComponent(Graphics g) {
 		g.setColor(component.getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 	}
