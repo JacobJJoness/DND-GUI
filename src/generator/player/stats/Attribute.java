@@ -1,6 +1,5 @@
 package generator.player.stats;
 
-import gui.*;
 import java.util.Random;
 
 /**
