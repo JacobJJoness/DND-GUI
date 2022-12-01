@@ -64,7 +64,6 @@ public class GUI {
 class Frame extends JFrame implements ActionListener {
     private PlayerCharacter randomCharacter = new PlayerCharacter(); //new random PlayerCharacter object
     private CharacterSheet characterList = new CharacterSheet(); //new character sheet object
-
     Color panelColor = new Color(150,150,150,150); //panel Color
 
     //initializing buttons
@@ -149,8 +148,16 @@ class Frame extends JFrame implements ActionListener {
         pack();
     }
 
-
+    /**
+     * Creates the output panel, which allows 
+     * a user to see System messages as well 
+     * as select the clear button to clear 
+     * the console.
+     * 
+     * @param item
+     */
     private void outputPanel(JLabel item) {
+        //panel structure and style
         outputPanel = new JPanel();
         outputPanel.setBounds(0, 0, 500, 50);
         outputPanel.setPreferredSize(new Dimension(600, 90));
@@ -189,21 +196,23 @@ class Frame extends JFrame implements ActionListener {
         clear.setFocusable(false);
         outputPanel.add(clear);
         
-        outputPanel.setBackground(panelColor);//A value determines transparency
+        outputPanel.setBackground(panelColor); //value determines transparency
         item.add(new AlphaContainer(outputPanel));
     }
+
     /**
      * Creates the help panel, which allows 
-     * a user to select the help button.
+     * a user to select the about and how to 
+     * use buttons.
      * 
      * @param item
      */
     private void helPanel(JLabel item) {
+        //panel structure and style
         helPanel = new JPanel();
         helPanel.setBounds(0,250,290,50);
         helPanel.setPreferredSize(new Dimension(300,90));
         
-
         //title border
         TitledBorder listBorder = BorderFactory.createTitledBorder("Generator Information");
         listBorder.setTitleColor(Color.WHITE);
@@ -224,16 +233,21 @@ class Frame extends JFrame implements ActionListener {
         help.setFocusable(false);
         helPanel.add(help);
 
-        helPanel.setBackground(panelColor); //A value determines transparency
+        helPanel.setBackground(panelColor); //value determines transparency
         item.add(new AlphaContainer(helPanel));
     }
 
-    ////
+    /**
+     * Creates the display panel, which allows 
+     * a user to see their current saved list 
+     * of characters as well as select the 
+     * remove and export buttons.
+     * 
+     * @param item
+     */
     private void displayPanel(JLabel item) {
         //panel structure and style
         disPanel = new JPanel();
-
-        //size and bounds of display panel
         disPanel.setBounds(0, 0, 500, 300);
         disPanel.setPreferredSize(new Dimension(600, 400));
 
@@ -275,44 +289,44 @@ class Frame extends JFrame implements ActionListener {
 
         //button for exporting character sheet
         export = new JButton();
-        export.setText("Export List to 'Downloads'");//text inside button
-        export.addActionListener(this);//adding button action
-        export.setFocusable(false);//removing a default box around text
-        disPanel.add(export);//adding button to panel
+        export.setText("Export List to 'Downloads'"); //text inside button
+        export.addActionListener(this); //adding button action
+        export.setFocusable(false); //removing a default box around text
+        disPanel.add(export); //adding button to panel
 
-        //code to wrap panel to make it partially transparent
-        disPanel.setBackground(panelColor);//A value determines transparency
+        disPanel.setBackground(panelColor); //value determines transparency
         item.add(new AlphaContainer(disPanel));
     }
 
     /**
      * Creates the generator panel, which allows 
-     * a user to select an action e.
+     * a user to select the generate new and save 
+     * to list buttons.
      * 
      * @param item
      */
     private void generatorPanel(JLabel item) {
         //panel structure and style
         genPanel = new JPanel();
-        
-        //size and bounds of generator panel
         genPanel.setBounds(0,0,290,350);
         genPanel.setPreferredSize(new Dimension(300,400));
 
+        //title border
         TitledBorder generatorBorder = BorderFactory.createTitledBorder("Character Generator");
         generatorBorder.setTitleColor(Color.WHITE);
         generatorBorder.setTitleJustification(TitledBorder.CENTER);
         genPanel.setBorder(generatorBorder);
 
+        //add character and information to panel
         characterImagePanel(genPanel);
         informationPanel(genPanel);
 
-        //Button for character generation
+        //button for character generation
         generator = new JButton();
-        generator.setText("Generate New");//text inside button
-        generator.addActionListener(this);//adding button action
-        generator.setFocusable(false);//removing a default box around text
-        genPanel.add(generator);//adding button to panel
+        generator.setText("Generate New"); //text inside button
+        generator.addActionListener(this); //adding button action
+        generator.setFocusable(false); //removing a default box around text
+        genPanel.add(generator); //adding button to panel
 
         //button for saving character
         save = new JButton(); 
@@ -321,7 +335,7 @@ class Frame extends JFrame implements ActionListener {
         save.setFocusable(false);
         genPanel.add(save);
 
-        genPanel.setBackground(panelColor);//A value determines transparency
+        genPanel.setBackground(panelColor); //value determines transparency
         item.add(new AlphaContainer(genPanel));
     }
 
@@ -363,9 +377,9 @@ class Frame extends JFrame implements ActionListener {
         //panel setup
         infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        
         infoPanel.setBounds(0,220,100,100);
-        infoPanel.setPreferredSize(new Dimension(250,140));//setting to a preference size, this is due to the fact that Jpanels will automatically just fill around components
+        infoPanel.setPreferredSize(new Dimension(250,140));
+
         //Header for panel
         JLabel statHeader = new JLabel();
         statHeader.setText("Character Stats:");
@@ -374,8 +388,7 @@ class Frame extends JFrame implements ActionListener {
         infoPanel.add(statHeader); //adding statistic labels
         setStatLabels(infoPanel); //adding generated stats
 
-        //code to wrap panel to make it partially transparent
-        infoPanel.setBackground(Color.WHITE);//A value determines transparency
+        infoPanel.setBackground(Color.WHITE); //value determines white
         item.add(infoPanel);
     }
     
@@ -437,8 +450,9 @@ class Frame extends JFrame implements ActionListener {
      */
     private void setStatLabels(JPanel item) {
         //storing then accessing stats
-        int[] stats = randomCharacter.getAttributes(); //grabbing character stats
-
+        int[] stats = randomCharacter.getAttributes(); 
+        
+        //grabbing character stats
         strStatDisp = new JLabel();
         strStatDisp.setText("Strength: " + stats[0]);
         strStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,13));
@@ -463,7 +477,6 @@ class Frame extends JFrame implements ActionListener {
         chrStatDisp.setText("Charisma: " + stats[5]);
         chrStatDisp.setFont(new Font("New Peninim MT",Font.PLAIN,13));
 
-    
         //adding all items
         item.add(strStatDisp);
         item.add(dexStatDisp);
@@ -473,21 +486,27 @@ class Frame extends JFrame implements ActionListener {
         item.add(chrStatDisp);
     }
 
+    /**
+     * Sets character list label.
+     * 
+     * @param item
+     */
     private void setCharacterSheet(JPanel item) {
          pcSheet = new JLabel();
-
          pcSheet.setHorizontalAlignment(SwingConstants.LEFT);
          pcSheet.setFont(new Font("New Peninim MT",Font.ITALIC,20));
-
          item.add(pcSheet);
     }
 
+    /**
+     * Sets console list label.
+     * 
+     * @param item
+     */
     private void setConsoleSheet(JPanel item) {
         conSheet = new JLabel();
-
         conSheet.setHorizontalAlignment(SwingConstants.CENTER);
         conSheet.setFont(new Font("New Peninim MT",Font.ITALIC,20));
-
         item.add(conSheet);
    }
 
@@ -536,10 +555,16 @@ class Frame extends JFrame implements ActionListener {
         desc.setText(temp);
     }
 
+    /**
+     * Generates and makes visible a pop-up dialog box that 
+     * functions as a user guide and instructions.
+     */
     private void helpPopUpDialogBox() {
+        //initializing small icon and new panel
         ImageIcon icon = new ImageIcon("images/updatedLogoSmall.png");
         JPanel temPanel = new JPanel();
         
+        //building String message in dialog pop-up box
         String message = "<html><body><p>";
         message += "<b>Welcome to the \"Dungeons & Dragons\" Random Character Generator!</b> <br><br><br>Here are a few tips to get started:<br>";
         message += "<br>";
@@ -568,16 +593,25 @@ class Frame extends JFrame implements ActionListener {
         message += "<b>Thank you for using the \"Dungeons & Dragons\" Random Character Generator!</b>";
         message += "<br></p></body></html>";
 
+        //creating new label and adding to panel
         JLabel tempLabel = new JLabel(message);
         tempLabel.setAlignmentX(JLabel.CENTER);
         temPanel.add(tempLabel);
 
+        //setting dialog box to visible with assigned parameters
         JOptionPane.showMessageDialog(this, temPanel, "User Guide", JOptionPane.INFORMATION_MESSAGE, icon);
     }
 
+    /**
+     * Generates and makes visible a pop-up dialog box that 
+     * functions as an about for the application.
+     */
     private void aboutPopUpDialogBox() {
+        //initializing small icon and new panel
         ImageIcon icon = new ImageIcon("images/updatedLogoSmall.png");
         JPanel temPanel = new JPanel();
+
+        //building String message in dialog pop-up box
         String message = "<html><head><style>h3{text-align: center;}h4{text-align: center;}p{text-align: center;}</style></head><body>";
         message += "<p>";
         message += "<b>\"Dungeons & Dragons\" Random Character Generator</b><br>";
@@ -592,31 +626,31 @@ class Frame extends JFrame implements ActionListener {
         message += "<b>Copyright © 2022 The Comedians. All rights reserved.</b>";
         message += "</p></body></html>";
 
+        //creating new label and adding to panel
         JLabel tempLabel = new JLabel(message);
         tempLabel.setAlignmentX(JLabel.CENTER);
         temPanel.add(tempLabel);
         
-        
+        //setting dialog box to visible with assigned parameters
         JOptionPane.showMessageDialog(this, tempLabel, "About", JOptionPane.INFORMATION_MESSAGE, icon);
-        
     }
 
-   
     /**
-     * Perfoms actions based on which button 
-     * the user selected using their mouse.
+     * Overrides the actionPerformed() method to 
+     * perfoms specialized actions based on which 
+     * button the user clicked on using their mouse.
      * 
      * @param e
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        //conModel.clear();
-
+        //checks for dialog button presses
         if(e.getSource() == about) {
             aboutPopUpDialogBox();
         } else if(e.getSource() == help) {
             helpPopUpDialogBox();
         } else {
+            //clears console
             if(e.getSource() == clear) {
                 conModel.clear();
             }
