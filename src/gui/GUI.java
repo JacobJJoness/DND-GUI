@@ -2,34 +2,24 @@ package gui;
 
 import generator.*;
 import generator.player.PlayerCharacter;
-
 import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-
 import javax.swing.border.TitledBorder;
-
-//import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.Color;
-//import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
-//import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
@@ -41,22 +31,28 @@ import java.awt.Image;
  * the application's GUI.
  * 
  * @author Jacob Jones
+ * @author Ila Wallace
  * @since November 14, 2022
  */
 public class GUI {
     
+    /**
+     * Main Driver class for the Frame object 
+     * and the MusicAdder object.
+     * 
+     * @param args
+     * 
+     * @exception Exception if MusicAdder object fails
+     */
     public static void main(String[] args) {
         Frame frame = new Frame();
-        try{
+        try {
             MusicAdder test = new MusicAdder();
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
             e.printStackTrace();
-            System.out.println("failed");
-
+            System.out.println("Failed build!");
         }
-        
     }
 }
 
@@ -68,18 +64,18 @@ public class GUI {
 class Frame extends JFrame implements ActionListener {
     private PlayerCharacter randomCharacter = new PlayerCharacter(); //new random PlayerCharacter object
     private CharacterSheet characterList = new CharacterSheet(); //new character sheet object
+
     Color panelColor = new Color(150,150,150,150); //panel Color
 
     //initializing buttons
     JButton generator; 
     JButton save;
     JButton export;
-    JButton remove; //
-    JButton clear; //
-    JButton help; //
+    JButton remove; 
+    JButton clear;
+    JButton help;
     JButton about;
     
-
     //initializing panels
     JPanel charaPanel;
     JPanel genPanel;
@@ -101,12 +97,12 @@ class Frame extends JFrame implements ActionListener {
     JLabel desc; //character description
 
     //initializing list of PlayerCharacters
-    JList pcList; //PlayerCharacter list
+    JList pcList;
     JScrollPane pcPane;
     DefaultListModel pcModel; 
     JLabel pcSheet;
 
-    //initializing console display
+    //initializing console list display
     JList conList;
     JScrollPane conPane;
     DefaultListModel conModel;
@@ -135,14 +131,14 @@ class Frame extends JFrame implements ActionListener {
         ImageIcon logoImage = new ImageIcon("images/updatedLogo.png");
         setIconImage(logoImage.getImage());
 
-        // background picture
+        //background picture
         ImageIcon backImg = new ImageIcon("images/background.jpg");
         ImageIcon scaleImage = new ImageIcon(backImg.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_DEFAULT));
         JLabel background = new JLabel("",scaleImage,JLabel.CENTER);
         background.setBounds(0,0,screenWidth,screenHeight);
         background.setLayout(new FlowLayout());
         
-        add(background); //add background image
+        add(background); //adds background image to frame
 
         //content panels
         generatorPanel(background);
